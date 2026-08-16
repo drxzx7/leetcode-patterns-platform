@@ -82,7 +82,7 @@ public:
         unordered_map&lt;int, int&gt; seen;
         for (int i = 0; i &lt; nums.size(); i++) {
             int complement = target - nums[i];
-            if (seen.find(complement) != seen.end()) {
+            if (seen.count(complement)) {
                 return {seen[complement], i};
             }
             seen[nums[i]] = i;
@@ -94,13 +94,13 @@ public:
       <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">Java Solution</h4>
       <pre class="code-editor-block"><code>class Solution {
     public int[] twoSum(int[] nums, int target) {
-        Map&lt;Integer, Integer&gt; seen = new HashMap&lt;&gt;();
+        Map&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;();
         for (int i = 0; i &lt; nums.length; i++) {
             int complement = target - nums[i];
-            if (seen.containsKey(complement)) {
-                return new int[]{seen.get(complement), i};
+            if (map.containsKey(complement)) {
+                return new int[]{map.get(complement), i};
             }
-            seen.put(nums[i], i);
+            map.put(nums[i], i);
         }
         return new int[]{};
     }
@@ -118,17 +118,17 @@ public:
         return []</code></pre>
 
       <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">JavaScript Solution</h4>
-      <pre class="code-editor-block"><code>function twoSum(nums, target) {
-    const seen = new Map();
+      <pre class="code-editor-block"><code>var twoSum = function(nums, target) {
+    const map = new Map();
     for (let i = 0; i &lt; nums.length; i++) {
         const complement = target - nums[i];
-        if (seen.has(complement)) {
-            return [seen.get(complement), i];
+        if (map.has(complement)) {
+            return [map.get(complement), i];
         }
-        seen.set(nums[i], i);
+        map.set(nums[i], i);
     }
     return [];
-}</code></pre>
+};</code></pre>
     </div>
 
     <div class="section-card-box">

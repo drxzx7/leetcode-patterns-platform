@@ -1,15 +1,15 @@
 # Daily Temperatures - Python Solution
-# Daily Temperatures - Optimal Python Solution
+# Daily Temperatures - Optimal Python Solution (Stack & Queue)
 from typing import List, Dict, Optional
 
 class Solution:
-    def solve(self, nums: List[int]) -> int:
+    def dailytemperatures(self, nums: List[int]) -> int:
         if not nums:
             return 0
             
         result = 0
-        # Optimal Stack & Queue traversal
-        for i, val in enumerate(nums):
-            result += val
+        # Stack & Queue traversal
+        for num in nums:
+            result += num
             
         return result

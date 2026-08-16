@@ -1,25 +1,14 @@
 // Valid Palindrome - C++ Solution
-// Valid Palindrome - Optimal C++ Solution
-#include <iostream>
-#include <vector>
-#include <unordered_map>
-#include <algorithm>
-
-using namespace std;
-
 class Solution {
 public:
-    auto solve(ValidPalindromeData data) {
-        // Optimal Two Pointers implementation
-        int n = data.size();
-        if (n == 0) return 0;
-        
-        int result = 0;
-        // Core algorithmic logic here
-        for (int i = 0; i < n; ++i) {
-            // Process element
-            result += i;
+    bool isPalindrome(string s) {
+        int left = 0, right = s.length() - 1;
+        while (left < right) {
+            while (left < right && !isalnum(s[left])) left++;
+            while (left < right && !isalnum(s[right])) right--;
+            if (tolower(s[left]) != tolower(s[right])) return false;
+            left++; right--;
         }
-        return result;
+        return true;
     }
 };

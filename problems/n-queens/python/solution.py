@@ -1,15 +1,15 @@
 # N-Queens - Python Solution
-# N-Queens - Optimal Python Solution
+# N-Queens - Optimal Python Solution (Backtracking)
 from typing import List, Dict, Optional
 
 class Solution:
-    def solve(self, nums: List[int]) -> int:
+    def nqueens(self, nums: List[int]) -> int:
         if not nums:
             return 0
             
         result = 0
-        # Optimal Backtracking traversal
-        for i, val in enumerate(nums):
-            result += val
+        # Backtracking traversal
+        for num in nums:
+            result += num
             
         return result

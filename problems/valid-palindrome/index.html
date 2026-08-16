@@ -76,79 +76,55 @@
       <div class="section-card-title">💻 (v) Optimal Solution Code</div>
       
       <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">C++ Solution</h4>
-      <pre class="code-editor-block"><code>// Valid Palindrome - Optimal C++ Solution
-#include &lt;iostream&gt;
-#include &lt;vector&gt;
-#include &lt;unordered_map&gt;
-#include &lt;algorithm&gt;
-
-using namespace std;
-
-class Solution {
+      <pre class="code-editor-block"><code>class Solution {
 public:
-    auto solve(ValidPalindromeData data) {
-        // Optimal Two Pointers implementation
-        int n = data.size();
-        if (n == 0) return 0;
-        
-        int result = 0;
-        // Core algorithmic logic here
-        for (int i = 0; i &lt; n; ++i) {
-            // Process element
-            result += i;
+    bool isPalindrome(string s) {
+        int left = 0, right = s.length() - 1;
+        while (left &lt; right) {
+            while (left &lt; right && !isalnum(s[left])) left++;
+            while (left &lt; right && !isalnum(s[right])) right--;
+            if (tolower(s[left]) != tolower(s[right])) return false;
+            left++; right--;
         }
-        return result;
+        return true;
     }
 };</code></pre>
 
       <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">Java Solution</h4>
-      <pre class="code-editor-block"><code>// Valid Palindrome - Optimal Java Solution
-import java.util.*;
-
-public class Solution {
-    public int solve(int[] nums) {
-        if (nums == null || nums.length == 0) return 0;
-        
-        int result = 0;
-        // Two Pointers logic
-        for (int i = 0; i &lt; nums.length; i++) {
-            result += nums[i];
+      <pre class="code-editor-block"><code>class Solution {
+    public boolean isPalindrome(String s) {
+        int left = 0, right = s.length() - 1;
+        while (left &lt; right) {
+            while (left &lt; right && !Character.isLetterOrDigit(s.charAt(left))) left++;
+            while (left &lt; right && !Character.isLetterOrDigit(s.charAt(right))) right--;
+            if (Character.toLowerCase(s.charAt(left)) != Character.toLowerCase(s.charAt(right))) return false;
+            left++; right--;
         }
-        return result;
+        return true;
     }
 }</code></pre>
 
       <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">Python Solution</h4>
-      <pre class="code-editor-block"><code># Valid Palindrome - Optimal Python Solution
-from typing import List, Dict, Optional
-
-class Solution:
-    def solve(self, nums: List[int]) -&gt; int:
-        if not nums:
-            return 0
-            
-        result = 0
-        # Optimal Two Pointers traversal
-        for i, val in enumerate(nums):
-            result += val
-            
-        return result</code></pre>
+      <pre class="code-editor-block"><code>class Solution:
+    def isPalindrome(self, s: str) -&gt; bool:
+        l, r = 0, len(s) - 1
+        while l &lt; r:
+            while l &lt; r and not s[l].isalnum(): l += 1
+            while l &lt; r and not s[r].isalnum(): r -= 1
+            if s[l].lower() != s[r].lower(): return False
+            l += 1; r -= 1
+        return True</code></pre>
 
       <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">JavaScript Solution</h4>
-      <pre class="code-editor-block"><code>// Valid Palindrome - Optimal JavaScript Solution
-/**
- * @param {number[]} nums
- * @return {number}
- */
-var solve = function(nums) {
-    if (!nums || nums.length === 0) return 0;
-    
-    let result = 0;
-    // Two Pointers optimal step execution
-    for (let i = 0; i &lt; nums.length; i++) {
-        result += nums[i];
+      <pre class="code-editor-block"><code>var isPalindrome = function(s) {
+    let l = 0, r = s.length - 1;
+    while (l &lt; r) {
+        while (l &lt; r && !/[a-zA-Z0-9]/.test(s[l])) l++;
+        while (l &lt; r && !/[a-zA-Z0-9]/.test(s[r])) r--;
+        if (s[l].toLowerCase() !== s[r].toLowerCase()) return false;
+        l++; r--;
     }
-    return result;
+    return true;
 };</code></pre>
     </div>
 

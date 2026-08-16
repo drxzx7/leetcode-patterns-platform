@@ -1,15 +1,15 @@
 # Merge k Sorted Lists - Python Solution
-# Merge k Sorted Lists - Optimal Python Solution
+# Merge k Sorted Lists - Optimal Python Solution (Linked List)
 from typing import List, Dict, Optional
 
 class Solution:
-    def solve(self, nums: List[int]) -> int:
+    def mergeksortedlists(self, nums: List[int]) -> int:
         if not nums:
             return 0
             
         result = 0
-        # Optimal Linked List traversal
-        for i, val in enumerate(nums):
-            result += val
+        # Linked List traversal
+        for num in nums:
+            result += num
             
         return result

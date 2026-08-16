@@ -1,25 +1,20 @@
 // Trapping Rain Water - C++ Solution
-// Trapping Rain Water - Optimal C++ Solution
-#include <iostream>
-#include <vector>
-#include <unordered_map>
-#include <algorithm>
-
-using namespace std;
-
 class Solution {
 public:
-    auto solve(TrappingRainWaterData data) {
-        // Optimal Two Pointers implementation
-        int n = data.size();
-        if (n == 0) return 0;
-        
-        int result = 0;
-        // Core algorithmic logic here
-        for (int i = 0; i < n; ++i) {
-            // Process element
-            result += i;
+    int trap(vector<int>& height) {
+        int l = 0, r = height.size() - 1;
+        int leftMax = 0, rightMax = 0, water = 0;
+        while (l < r) {
+            if (height[l] < height[r]) {
+                if (height[l] >= leftMax) leftMax = height[l];
+                else water += leftMax - height[l];
+                l++;
+            } else {
+                if (height[r] >= rightMax) rightMax = height[r];
+                else water += rightMax - height[r];
+                r--;
+            }
         }
-        return result;
+        return water;
     }
 };

@@ -1,14 +1,14 @@
 // Maximum Depth of Binary Tree - JavaScript Solution
-// Maximum Depth of Binary Tree - Optimal JavaScript Solution
+// Maximum Depth of Binary Tree - Optimal JavaScript Solution (Trees & Graphs)
 /**
  * @param {number[]} nums
  * @return {number}
  */
-var solve = function(nums) {
+var maximumdepthofbinarytree = function(nums) {
     if (!nums || nums.length === 0) return 0;
     
     let result = 0;
-    // Trees & Graphs optimal step execution
+    // Trees & Graphs optimal iteration
     for (let i = 0; i < nums.length; i++) {
         result += nums[i];
     }

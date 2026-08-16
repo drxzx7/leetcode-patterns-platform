@@ -76,79 +76,80 @@
       <div class="section-card-title">💻 (v) Optimal Solution Code</div>
       
       <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">C++ Solution</h4>
-      <pre class="code-editor-block"><code>// Trapping Rain Water - Optimal C++ Solution
-#include &lt;iostream&gt;
-#include &lt;vector&gt;
-#include &lt;unordered_map&gt;
-#include &lt;algorithm&gt;
-
-using namespace std;
-
-class Solution {
+      <pre class="code-editor-block"><code>class Solution {
 public:
-    auto solve(TrappingRainWaterData data) {
-        // Optimal Two Pointers implementation
-        int n = data.size();
-        if (n == 0) return 0;
-        
-        int result = 0;
-        // Core algorithmic logic here
-        for (int i = 0; i &lt; n; ++i) {
-            // Process element
-            result += i;
+    int trap(vector&lt;int&gt;& height) {
+        int l = 0, r = height.size() - 1;
+        int leftMax = 0, rightMax = 0, water = 0;
+        while (l &lt; r) {
+            if (height[l] &lt; height[r]) {
+                if (height[l] &gt;= leftMax) leftMax = height[l];
+                else water += leftMax - height[l];
+                l++;
+            } else {
+                if (height[r] &gt;= rightMax) rightMax = height[r];
+                else water += rightMax - height[r];
+                r--;
+            }
         }
-        return result;
+        return water;
     }
 };</code></pre>
 
       <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">Java Solution</h4>
-      <pre class="code-editor-block"><code>// Trapping Rain Water - Optimal Java Solution
-import java.util.*;
-
-public class Solution {
-    public int solve(int[] nums) {
-        if (nums == null || nums.length == 0) return 0;
-        
-        int result = 0;
-        // Two Pointers logic
-        for (int i = 0; i &lt; nums.length; i++) {
-            result += nums[i];
+      <pre class="code-editor-block"><code>class Solution {
+    public int trap(int[] height) {
+        int l = 0, r = height.length - 1;
+        int leftMax = 0, rightMax = 0, water = 0;
+        while (l &lt; r) {
+            if (height[l] &lt; height[r]) {
+                if (height[l] &gt;= leftMax) leftMax = height[l];
+                else water += leftMax - height[l];
+                l++;
+            } else {
+                if (height[r] &gt;= rightMax) rightMax = height[r];
+                else water += rightMax - height[r];
+                r--;
+            }
         }
-        return result;
+        return water;
     }
 }</code></pre>
 
       <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">Python Solution</h4>
-      <pre class="code-editor-block"><code># Trapping Rain Water - Optimal Python Solution
-from typing import List, Dict, Optional
-
-class Solution:
-    def solve(self, nums: List[int]) -&gt; int:
-        if not nums:
-            return 0
-            
-        result = 0
-        # Optimal Two Pointers traversal
-        for i, val in enumerate(nums):
-            result += val
-            
-        return result</code></pre>
+      <pre class="code-editor-block"><code>class Solution:
+    def trap(self, height: List[int]) -&gt; int:
+        if not height: return 0
+        l, r = 0, len(height) - 1
+        leftMax, rightMax = height[l], height[r]
+        res = 0
+        while l &lt; r:
+            if leftMax &lt; rightMax:
+                l += 1
+                leftMax = max(leftMax, height[l])
+                res += leftMax - height[l]
+            else:
+                r -= 1
+                rightMax = max(rightMax, height[r])
+                res += rightMax - height[r]
+        return res</code></pre>
 
       <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">JavaScript Solution</h4>
-      <pre class="code-editor-block"><code>// Trapping Rain Water - Optimal JavaScript Solution
-/**
- * @param {number[]} nums
- * @return {number}
- */
-var solve = function(nums) {
-    if (!nums || nums.length === 0) return 0;
-    
-    let result = 0;
-    // Two Pointers optimal step execution
-    for (let i = 0; i &lt; nums.length; i++) {
-        result += nums[i];
+      <pre class="code-editor-block"><code>var trap = function(height) {
+    let l = 0, r = height.length - 1;
+    let leftMax = 0, rightMax = 0, res = 0;
+    while (l &lt; r) {
+        if (height[l] &lt; height[r]) {
+            if (height[l] &gt;= leftMax) leftMax = height[l];
+            else res += leftMax - height[l];
+            l++;
+        } else {
+            if (height[r] &gt;= rightMax) rightMax = height[r];
+            else res += rightMax - height[r];
+            r--;
+        }
     }
-    return result;
+    return res;
 };</code></pre>
     </div>
 

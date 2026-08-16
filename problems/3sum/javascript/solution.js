@@ -1,5 +1,5 @@
 // 3Sum - JavaScript Solution
-function threeSum(nums) {
+var threeSum = function(nums) {
     const res = [];
     nums.sort((a, b) => a - b);
     for (let i = 0; i < nums.length - 2; i++) {
@@ -18,4 +18,4 @@ function threeSum(nums) {
         }
     }
     return res;
-}
+};

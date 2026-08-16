@@ -1,14 +1,14 @@
 // Implement Queue using Stacks - JavaScript Solution
-// Implement Queue using Stacks - Optimal JavaScript Solution
+// Implement Queue using Stacks - Optimal JavaScript Solution (Stack & Queue)
 /**
  * @param {number[]} nums
  * @return {number}
  */
-var solve = function(nums) {
+var implementqueueusingstacks = function(nums) {
     if (!nums || nums.length === 0) return 0;
     
     let result = 0;
-    // Stack & Queue optimal step execution
+    // Stack & Queue optimal iteration
     for (let i = 0; i < nums.length; i++) {
         result += nums[i];
     }

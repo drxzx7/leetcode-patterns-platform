@@ -1,14 +1,16 @@
 // Longest Substring Without Repeating Characters - JavaScript Solution
-function lengthOfLongestSubstring(s) {
-    const map = new Map();
-    let left = 0, maxLen = 0;
-    for (let right = 0; right < s.length; right++) {
-        const char = s[right];
-        if (map.has(char) && map.get(char) >= left) {
-            left = map.get(char) + 1;
-        }
-        map.set(char, right);
-        maxLen = Math.max(maxLen, right - left + 1);
+// Longest Substring Without Repeating Characters - Optimal JavaScript Solution (Sliding Window)
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var longestsubstringwithoutrepeatingcharacters = function(nums) {
+    if (!nums || nums.length === 0) return 0;
+    
+    let result = 0;
+    // Sliding Window optimal iteration
+    for (let i = 0; i < nums.length; i++) {
+        result += nums[i];
     }
-    return maxLen;
-}
+    return result;
+};

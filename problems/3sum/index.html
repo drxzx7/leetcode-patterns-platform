@@ -81,19 +81,18 @@ public:
     vector&lt;vector&lt;int&gt;&gt; threeSum(vector&lt;int&gt;& nums) {
         vector&lt;vector&lt;int&gt;&gt; res;
         sort(nums.begin(), nums.end());
-        
         for (int i = 0; i &lt; nums.size(); i++) {
             if (i &gt; 0 && nums[i] == nums[i-1]) continue;
-            int left = i + 1, right = nums.size() - 1;
-            while (left &lt; right) {
-                int sum = nums[i] + nums[left] + nums[right];
-                if (sum &lt; 0) left++;
-                else if (sum &gt; 0) right--;
+            int l = i + 1, r = nums.size() - 1;
+            while (l &lt; r) {
+                int sum = nums[i] + nums[l] + nums[r];
+                if (sum &lt; 0) l++;
+                else if (sum &gt; 0) r--;
                 else {
-                    res.push_back({nums[i], nums[left], nums[right]});
-                    while (left &lt; right && nums[left] == nums[left+1]) left++;
-                    while (left &lt; right && nums[right] == nums[right-1]) right--;
-                    left++; right--;
+                    res.push_back({nums[i], nums[l], nums[r]});
+                    while (l &lt; r && nums[l] == nums[l+1]) l++;
+                    while (l &lt; r && nums[r] == nums[r-1]) r--;
+                    l++; r--;
                 }
             }
         }
@@ -106,19 +105,18 @@ public:
     public List&lt;List&lt;Integer&gt;&gt; threeSum(int[] nums) {
         Arrays.sort(nums);
         List&lt;List&lt;Integer&gt;&gt; res = new ArrayList&lt;&gt;();
-        
         for (int i = 0; i &lt; nums.length - 2; i++) {
             if (i &gt; 0 && nums[i] == nums[i - 1]) continue;
-            int left = i + 1, right = nums.length - 1;
-            while (left &lt; right) {
-                int sum = nums[i] + nums[left] + nums[right];
-                if (sum &lt; 0) left++;
-                else if (sum &gt; 0) right--;
+            int l = i + 1, r = nums.length - 1;
+            while (l &lt; r) {
+                int sum = nums[i] + nums[l] + nums[r];
+                if (sum &lt; 0) l++;
+                else if (sum &gt; 0) r--;
                 else {
-                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));
-                    while (left &lt; right && nums[left] == nums[left + 1]) left++;
-                    while (left &lt; right && nums[right] == nums[right - 1]) right--;
-                    left++; right--;
+                    res.add(Arrays.asList(nums[i], nums[l], nums[r]));
+                    while (l &lt; r && nums[l] == nums[l + 1]) l++;
+                    while (l &lt; r && nums[r] == nums[r - 1]) r--;
+                    l++; r--;
                 }
             }
         }
@@ -132,24 +130,20 @@ public:
         res = []
         nums.sort()
         for i, a in enumerate(nums):
-            if i &gt; 0 and a == nums[i - 1]:
-                continue
+            if i &gt; 0 and a == nums[i - 1]: continue
             l, r = i + 1, len(nums) - 1
             while l &lt; r:
                 threeSum = a + nums[l] + nums[r]
-                if threeSum &gt; 0:
-                    r -= 1
-                elif threeSum &lt; 0:
-                    l += 1
+                if threeSum &gt; 0: r -= 1
+                elif threeSum &lt; 0: l += 1
                 else:
                     res.append([a, nums[l], nums[r]])
                     l += 1
-                    while nums[l] == nums[l - 1] and l &lt; r:
-                        l += 1
+                    while nums[l] == nums[l - 1] and l &lt; r: l += 1
         return res</code></pre>
 
       <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">JavaScript Solution</h4>
-      <pre class="code-editor-block"><code>function threeSum(nums) {
+      <pre class="code-editor-block"><code>var threeSum = function(nums) {
     const res = [];
     nums.sort((a, b) =&gt; a - b);
     for (let i = 0; i &lt; nums.length - 2; i++) {
@@ -168,7 +162,7 @@ public:
         }
     }
     return res;
-}</code></pre>
+};</code></pre>
     </div>
 
     <div class="section-card-box">

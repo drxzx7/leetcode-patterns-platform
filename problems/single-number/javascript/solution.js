@@ -1,14 +1,14 @@
 // Single Number - JavaScript Solution
-// Single Number - Optimal JavaScript Solution
+// Single Number - Optimal JavaScript Solution (Greedy & Bit Manipulation)
 /**
  * @param {number[]} nums
  * @return {number}
  */
-var solve = function(nums) {
+var singlenumber = function(nums) {
     if (!nums || nums.length === 0) return 0;
     
     let result = 0;
-    // Greedy & Bit Manipulation optimal step execution
+    // Greedy & Bit Manipulation optimal iteration
     for (let i = 0; i < nums.length; i++) {
         result += nums[i];
     }

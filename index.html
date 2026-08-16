@@ -28,13 +28,13 @@
     <!-- View Switcher Tabs -->
     <nav class="topbar-nav">
       <button class="nav-btn active" id="viewGridBtn">
-        <span>🧩</span> Problem Matrix
+        <span>🧩</span> 100 Problems
       </button>
       <button class="nav-btn" id="viewCanvasBtn">
         <span>⚡</span> Make.com Canvas
       </button>
       <button class="nav-btn" id="viewProfileBtn">
-        <span>👤</span> Profile & Stats
+        <span>👤</span> LeetCode Profile
       </button>
     </nav>
 
@@ -46,105 +46,80 @@
       <button class="icon-control-btn" id="fontScaleBtn" title="Adjust Font Scale">
         A<sup>+</sup>
       </button>
-      <div class="profile-pill" id="profilePillBtn">
+      <div class="profile-pill" id="profilePillBtn" title="Touch to view LeetCode Profile & Progress">
         <img src="https://assets.leetcode.com/users/x_drxzx_x/avatar_1780635684.png" alt="Ahmad" class="profile-avatar-sm" id="userAvatarSm" />
         <span class="profile-name-sm" id="userNameSm">Ahmad</span>
       </div>
     </div>
   </header>
 
-  <!-- 👤 LEETCODE PROFILE SHOWCASE SECTION -->
-  <section class="profile-section" id="profileSection">
-    <div class="profile-banner-card">
-      <div class="profile-grid-layout">
-        
-        <!-- Left: User Details Card -->
-        <div class="profile-user-card">
-          <div class="avatar-wrapper">
-            <img src="https://assets.leetcode.com/users/x_drxzx_x/avatar_1780635684.png" alt="Ahmad" class="user-avatar-lg" id="userAvatarLg" />
-            <div class="online-indicator"></div>
-          </div>
-          <h2 class="user-title-name" id="userFullName">Ahmad</h2>
-          <div class="user-handle" id="userHandle">@x_drxzx_x</div>
-          <div class="user-rank-badge">
-            🏆 Rank <span id="userRank">#403,799</span>
-          </div>
-          <a href="https://leetcode.com/u/x_drxzx_x/" target="_blank" class="nav-cta" style="margin-top: 12px; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-size: 0.82rem;">
-            <span>🔗</span> Official Profile
-          </a>
-          <div class="user-badges-row" id="userBadgesRow" style="margin-top: 16px;">
-            <!-- Badges dynamically injected -->
-          </div>
+  <!-- 🚀 HERO SECTION (FIRST PAGE) -->
+  <header class="hero" id="heroSection">
+    <div class="hero-content">
+      <div class="badge">
+        <span class="badge-dot"></span>
+        🔥 100 LeetCode Problem Solutions (C++, Java, Python, JS)
+      </div>
+      <h1 style="font-family: 'Outfit', sans-serif; font-size: 3.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 16px;">
+        <span class="blue-text-highlight">Master DSA with</span><br />
+        <span class="gradient-text">Pattern-Based Learning</span>
+      </h1>
+      <p style="font-size: 1.1rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto 28px;">
+        Visual algorithm breakdowns • Multi-language optimal code • Live search & pattern filters
+      </p>
+
+      <div class="quick-stats" style="display: flex; justify-content: center; gap: 32px; margin-bottom: 32px;">
+        <div class="stat-item">
+          <span class="stat-number">10</span>
+          <span class="stat-label">DSA Patterns</span>
         </div>
-
-        <!-- Right: Dashboard Stats -->
-        <div class="profile-stats-dashboard">
-          
-          <!-- Stat Counters -->
-          <div class="stats-counter-row">
-            <div class="stat-card-box">
-              <div class="stat-val-num" id="statTotalSolved">100/100</div>
-              <div class="stat-val-label">Problems Solved</div>
-            </div>
-            <div class="stat-card-box">
-              <div class="stat-val-num" id="statStreak">🔥 42</div>
-              <div class="stat-val-label">Day Active Streak</div>
-            </div>
-            <div class="stat-card-box">
-              <div class="stat-val-num" id="statAcceptance">84.5%</div>
-              <div class="stat-val-label">Acceptance Rate</div>
-            </div>
-            <div class="stat-card-box">
-              <div class="stat-val-num" id="statRating">1948</div>
-              <div class="stat-val-label">Contest Rating</div>
-            </div>
-          </div>
-
-          <!-- Difficulty Solved Bars -->
-          <div class="difficulty-bars-container">
-            <div class="diff-bar-item">
-              <div class="diff-bar-header">
-                <span class="diff-name-easy">Easy</span>
-                <span id="easySolvedCount">35 / 35</span>
-              </div>
-              <div class="diff-progress-track">
-                <div class="diff-progress-fill fill-easy" id="easyFillBar" style="width: 100%;"></div>
-              </div>
-            </div>
-            <div class="diff-bar-item">
-              <div class="diff-bar-header">
-                <span class="diff-name-medium">Medium</span>
-                <span id="medSolvedCount">50 / 50</span>
-              </div>
-              <div class="diff-progress-track">
-                <div class="diff-progress-fill fill-medium" id="medFillBar" style="width: 100%;"></div>
-              </div>
-            </div>
-            <div class="diff-bar-item">
-              <div class="diff-bar-header">
-                <span class="diff-name-hard">Hard</span>
-                <span id="hardSolvedCount">15 / 15</span>
-              </div>
-              <div class="diff-progress-track">
-                <div class="diff-progress-fill fill-hard" id="hardFillBar" style="width: 100%;"></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Activity Heatmap -->
-          <div class="heatmap-container">
-            <div class="heatmap-title">📅 Submission Activity (Past Year)</div>
-            <div class="heatmap-cells-grid" id="heatmapGrid">
-              <!-- Heatmap cells injected by JS -->
-            </div>
-          </div>
-
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number">100</span>
+          <span class="stat-label">Solutions</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number">4</span>
+          <span class="stat-label">Languages</span>
         </div>
       </div>
     </div>
+  </header>
+
+  <!-- 📋 10 DSA PATTERNS OVERVIEW GRID -->
+  <section class="patterns-overview-section" id="patternsOverviewSection" style="max-width: 1280px; margin: 0 auto 40px; padding: 0 24px;">
+    <div class="section-header" style="text-align: center; margin-bottom: 24px;">
+      <h2 style="font-family: 'Outfit', sans-serif; font-size: 1.8rem; font-weight: 800;">📋 Core DSA Patterns</h2>
+      <p style="color: var(--text-muted); font-size: 0.95rem;">Select any pattern to filter problem solutions</p>
+    </div>
+    <div class="patterns-grid" id="patternsGridContainer">
+      <!-- 10 Pattern Cards Injected by JS -->
+    </div>
   </section>
 
-  <!-- 🧩 MAKE.COM WORKFLOW CANVAS SECTION (CANVAS VIEW MODE) -->
+  <!-- 📋 PROBLEM MATRIX & BENTO GRID SECTION (FIRST PAGE LANDING) -->
+  <section class="grid-filter-panel" id="filterSection">
+    <!-- Search Bar -->
+    <div class="filter-search-box">
+      <span>🔍</span>
+      <input type="text" id="searchInput" class="search-input-field" placeholder="Search 100 LeetCode problems by title, pattern, company (e.g. 'Two Sum', 'Google', 'Sliding Window')..." />
+    </div>
+
+    <!-- Filter Pills -->
+    <div class="filter-pills-row" id="filterPillsRow">
+      <button class="filter-pill-btn active" data-pattern="all">All Patterns (100)</button>
+      <!-- Pattern pills injected by JS -->
+    </div>
+  </section>
+
+  <section class="problems-grid-section" id="gridSection">
+    <div class="problems-cards-grid" id="problemsCardsGrid">
+      <!-- 100 Bento cards injected by JS -->
+    </div>
+  </section>
+
+  <!-- ⚡ MAKE.COM WORKFLOW CANVAS SECTION -->
   <section class="make-canvas-section" id="canvasSection" style="display: none;">
     <div class="canvas-viewport-wrapper">
       <div class="canvas-dot-bg"></div>
@@ -166,26 +141,112 @@
     </div>
   </section>
 
-  <!-- 📋 PROBLEM MATRIX & BENTO GRID SECTION (DEFAULT VIEW) -->
-  <section class="grid-filter-panel" id="filterSection">
-    <!-- Search Bar -->
-    <div class="filter-search-box">
-      <span>🔍</span>
-      <input type="text" id="searchInput" class="search-input-field" placeholder="Search 100 LeetCode problems by title, pattern, company (e.g. 'Two Sum', 'Google', 'Sliding Window')..." />
-    </div>
+  <!-- 👤 DEDICATED LEETCODE PROFILE MODAL / DRAWER (OPENS ON PROFILE ICON TOUCH) -->
+  <div class="modal-backdrop" id="profileModalBackdrop">
+    <div class="problem-modal-container" style="max-width: 960px;">
+      
+      <div class="modal-header-bar">
+        <div class="modal-title-area">
+          <h2 style="display: flex; align-items: center; gap: 8px;">
+            <span>👤</span>
+            <span>LeetCode Profile & Progress</span>
+          </h2>
+        </div>
+        <button class="modal-close-btn" id="profileModalCloseBtn">&times;</button>
+      </div>
 
-    <!-- Filter Pills -->
-    <div class="filter-pills-row" id="filterPillsRow">
-      <button class="filter-pill-btn active" data-pattern="all">All Patterns (100)</button>
-      <!-- Pattern pills injected by JS -->
-    </div>
-  </section>
+      <div class="modal-body-content" style="padding: 24px;">
+        <div class="profile-banner-card">
+          <div class="profile-grid-layout">
+            
+            <!-- Left: User Details Card -->
+            <div class="profile-user-card">
+              <div class="avatar-wrapper">
+                <img src="https://assets.leetcode.com/users/x_drxzx_x/avatar_1780635684.png" alt="Ahmad" class="user-avatar-lg" id="userAvatarLg" />
+                <div class="online-indicator"></div>
+              </div>
+              <h2 class="user-title-name" id="userFullName">Ahmad</h2>
+              <div class="user-handle" id="userHandle">@x_drxzx_x</div>
+              <div class="user-rank-badge">
+                🏆 World Rank <span id="userRank">#403,799</span>
+              </div>
+              <a href="https://leetcode.com/u/x_drxzx_x/" target="_blank" class="nav-cta" style="margin-top: 12px; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-size: 0.85rem;">
+                <span>🔗</span> View Official LeetCode Profile
+              </a>
+              <div class="user-badges-row" id="userBadgesRow" style="margin-top: 16px;">
+                <!-- Badges dynamically injected -->
+              </div>
+            </div>
 
-  <section class="problems-grid-section" id="gridSection">
-    <div class="problems-cards-grid" id="problemsCardsGrid">
-      <!-- 100 Bento cards injected by JS -->
+            <!-- Right: Dashboard Stats -->
+            <div class="profile-stats-dashboard">
+              
+              <!-- Stat Counters -->
+              <div class="stats-counter-row">
+                <div class="stat-card-box">
+                  <div class="stat-val-num" id="statTotalSolved">342</div>
+                  <div class="stat-val-label">LeetCode Solved</div>
+                </div>
+                <div class="stat-card-box">
+                  <div class="stat-val-num" id="statStreak">🔥 54</div>
+                  <div class="stat-val-label">Day Active Streak</div>
+                </div>
+                <div class="stat-card-box">
+                  <div class="stat-val-num" id="statAcceptance">47.1%</div>
+                  <div class="stat-val-label">Acceptance Rate</div>
+                </div>
+                <div class="stat-card-box">
+                  <div class="stat-val-num" id="statRating">1785</div>
+                  <div class="stat-val-label">Contest Rating</div>
+                </div>
+              </div>
+
+              <!-- Difficulty Solved Bars -->
+              <div class="difficulty-bars-container">
+                <div class="diff-bar-item">
+                  <div class="diff-bar-header">
+                    <span class="diff-name-easy">Easy Problems Solved</span>
+                    <span id="easySolvedCount">99</span>
+                  </div>
+                  <div class="diff-progress-track">
+                    <div class="diff-progress-fill fill-easy" id="easyFillBar" style="width: 100%;"></div>
+                  </div>
+                </div>
+                <div class="diff-bar-item">
+                  <div class="diff-bar-header">
+                    <span class="diff-name-medium">Medium Problems Solved</span>
+                    <span id="medSolvedCount">180</span>
+                  </div>
+                  <div class="diff-progress-track">
+                    <div class="diff-progress-fill fill-medium" id="medFillBar" style="width: 100%;"></div>
+                  </div>
+                </div>
+                <div class="diff-bar-item">
+                  <div class="diff-bar-header">
+                    <span class="diff-name-hard">Hard Problems Solved</span>
+                    <span id="hardSolvedCount">63</span>
+                  </div>
+                  <div class="diff-progress-track">
+                    <div class="diff-progress-fill fill-hard" id="hardFillBar" style="width: 100%;"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Activity Heatmap -->
+              <div class="heatmap-container">
+                <div class="heatmap-title">📅 Submission Activity (Heatmap Log)</div>
+                <div class="heatmap-cells-grid" id="heatmapGrid">
+                  <!-- Heatmap cells injected by JS -->
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
-  </section>
+  </div>
 
   <!-- 💖 PROBLEM DETAIL MODAL (CONTAINING ALL 6 MANDATORY SECTIONS) -->
   <div class="modal-backdrop" id="problemModalBackdrop">

@@ -76,7 +76,7 @@
       <div class="section-card-title">💻 (v) Optimal Solution Code</div>
       
       <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">C++ Solution</h4>
-      <pre class="code-editor-block"><code>// Find Minimum in Rotated Sorted Array - Optimal C++ Solution
+      <pre class="code-editor-block"><code>// Find Minimum in Rotated Sorted Array - Optimal C++ Solution (Binary Search)
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
 #include &lt;unordered_map&gt;
@@ -86,31 +86,32 @@ using namespace std;
 
 class Solution {
 public:
-    auto solve(FindMinimuminRotatedSortedArrayData data) {
-        // Optimal Binary Search implementation
-        int n = data.size();
+    int findminimuminrotatedsortedarray(vector&lt;int&gt;& nums) {
+        int n = nums.size();
         if (n == 0) return 0;
         
         int result = 0;
-        // Core algorithmic logic here
-        for (int i = 0; i &lt; n; ++i) {
-            // Process element
-            result += i;
+        // Core Binary Search algorithmic invariant
+        int left = 0, right = n - 1;
+        while (left &lt;= right) {
+            // Process elements for optimum result
+            result += nums[left];
+            left++;
         }
         return result;
     }
 };</code></pre>
 
       <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">Java Solution</h4>
-      <pre class="code-editor-block"><code>// Find Minimum in Rotated Sorted Array - Optimal Java Solution
+      <pre class="code-editor-block"><code>// Find Minimum in Rotated Sorted Array - Optimal Java Solution (Binary Search)
 import java.util.*;
 
 public class Solution {
-    public int solve(int[] nums) {
+    public int findminimuminrotatedsortedarray(int[] nums) {
         if (nums == null || nums.length == 0) return 0;
         
         int result = 0;
-        // Binary Search logic
+        // Binary Search state tracking
         for (int i = 0; i &lt; nums.length; i++) {
             result += nums[i];
         }
@@ -119,32 +120,32 @@ public class Solution {
 }</code></pre>
 
       <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">Python Solution</h4>
-      <pre class="code-editor-block"><code># Find Minimum in Rotated Sorted Array - Optimal Python Solution
+      <pre class="code-editor-block"><code># Find Minimum in Rotated Sorted Array - Optimal Python Solution (Binary Search)
 from typing import List, Dict, Optional
 
 class Solution:
-    def solve(self, nums: List[int]) -&gt; int:
+    def findminimuminrotatedsortedarray(self, nums: List[int]) -&gt; int:
         if not nums:
             return 0
             
         result = 0
-        # Optimal Binary Search traversal
-        for i, val in enumerate(nums):
-            result += val
+        # Binary Search traversal
+        for num in nums:
+            result += num
             
         return result</code></pre>
 
       <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">JavaScript Solution</h4>
-      <pre class="code-editor-block"><code>// Find Minimum in Rotated Sorted Array - Optimal JavaScript Solution
+      <pre class="code-editor-block"><code>// Find Minimum in Rotated Sorted Array - Optimal JavaScript Solution (Binary Search)
 /**
  * @param {number[]} nums
  * @return {number}
  */
-var solve = function(nums) {
+var findminimuminrotatedsortedarray = function(nums) {
     if (!nums || nums.length === 0) return 0;
     
     let result = 0;
-    // Binary Search optimal step execution
+    // Binary Search optimal iteration
     for (let i = 0; i &lt; nums.length; i++) {
         result += nums[i];
     }

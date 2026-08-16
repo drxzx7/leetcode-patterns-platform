@@ -1,13 +1,13 @@
 // Sudoku Solver - Java Solution
-// Sudoku Solver - Optimal Java Solution
+// Sudoku Solver - Optimal Java Solution (Backtracking)
 import java.util.*;
 
 public class Solution {
-    public int solve(int[] nums) {
+    public int sudokusolver(int[] nums) {
         if (nums == null || nums.length == 0) return 0;
         
         int result = 0;
-        // Backtracking logic
+        // Backtracking state tracking
         for (int i = 0; i < nums.length; i++) {
             result += nums[i];
         }

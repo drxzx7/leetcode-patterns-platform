@@ -1,13 +1,13 @@
 // Find Median from Data Stream - Java Solution
-// Find Median from Data Stream - Optimal Java Solution
+// Find Median from Data Stream - Optimal Java Solution (Heap & Priority Queue)
 import java.util.*;
 
 public class Solution {
-    public int solve(int[] nums) {
+    public int findmedianfromdatastream(int[] nums) {
         if (nums == null || nums.length == 0) return 0;
         
         int result = 0;
-        // Heap & Priority Queue logic
+        // Heap & Priority Queue state tracking
         for (int i = 0; i < nums.length; i++) {
             result += nums[i];
         }

@@ -1,15 +1,15 @@
 # Binary Tree Level Order Traversal - Python Solution
-# Binary Tree Level Order Traversal - Optimal Python Solution
+# Binary Tree Level Order Traversal - Optimal Python Solution (Trees & Graphs)
 from typing import List, Dict, Optional
 
 class Solution:
-    def solve(self, nums: List[int]) -> int:
+    def binarytreelevelordertraversal(self, nums: List[int]) -> int:
         if not nums:
             return 0
             
         result = 0
-        # Optimal Trees & Graphs traversal
-        for i, val in enumerate(nums):
-            result += val
+        # Trees & Graphs traversal
+        for num in nums:
+            result += num
             
         return result

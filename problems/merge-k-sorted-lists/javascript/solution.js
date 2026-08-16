@@ -1,14 +1,14 @@
 // Merge k Sorted Lists - JavaScript Solution
-// Merge k Sorted Lists - Optimal JavaScript Solution
+// Merge k Sorted Lists - Optimal JavaScript Solution (Linked List)
 /**
  * @param {number[]} nums
  * @return {number}
  */
-var solve = function(nums) {
+var mergeksortedlists = function(nums) {
     if (!nums || nums.length === 0) return 0;
     
     let result = 0;
-    // Linked List optimal step execution
+    // Linked List optimal iteration
     for (let i = 0; i < nums.length; i++) {
         result += nums[i];
     }

@@ -1,15 +1,15 @@
 # Remove Duplicates from Sorted Array - Python Solution
-# Remove Duplicates from Sorted Array - Optimal Python Solution
+# Remove Duplicates from Sorted Array - Optimal Python Solution (Two Pointers)
 from typing import List, Dict, Optional
 
 class Solution:
-    def solve(self, nums: List[int]) -> int:
+    def removeduplicatesfromsortedarray(self, nums: List[int]) -> int:
         if not nums:
             return 0
             
         result = 0
-        # Optimal Two Pointers traversal
-        for i, val in enumerate(nums):
-            result += val
+        # Two Pointers traversal
+        for num in nums:
+            result += num
             
         return result

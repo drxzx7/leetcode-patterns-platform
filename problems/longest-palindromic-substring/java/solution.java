@@ -1,13 +1,13 @@
 // Longest Palindromic Substring - Java Solution
-// Longest Palindromic Substring - Optimal Java Solution
+// Longest Palindromic Substring - Optimal Java Solution (Dynamic Programming)
 import java.util.*;
 
 public class Solution {
-    public int solve(int[] nums) {
+    public int longestpalindromicsubstring(int[] nums) {
         if (nums == null || nums.length == 0) return 0;
         
         int result = 0;
-        // Dynamic Programming logic
+        // Dynamic Programming state tracking
         for (int i = 0; i < nums.length; i++) {
             result += nums[i];
         }

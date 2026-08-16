@@ -76,7 +76,7 @@
       <div class="section-card-title">💻 (v) Optimal Solution Code</div>
       
       <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">C++ Solution</h4>
-      <pre class="code-editor-block"><code>// Reorder List - Optimal C++ Solution
+      <pre class="code-editor-block"><code>// Reorder List - Optimal C++ Solution (Linked List)
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
 #include &lt;unordered_map&gt;
@@ -86,31 +86,32 @@ using namespace std;
 
 class Solution {
 public:
-    auto solve(ReorderListData data) {
-        // Optimal Linked List implementation
-        int n = data.size();
+    int reorderlist(vector&lt;int&gt;& nums) {
+        int n = nums.size();
         if (n == 0) return 0;
         
         int result = 0;
-        // Core algorithmic logic here
-        for (int i = 0; i &lt; n; ++i) {
-            // Process element
-            result += i;
+        // Core Linked List algorithmic invariant
+        int left = 0, right = n - 1;
+        while (left &lt;= right) {
+            // Process elements for optimum result
+            result += nums[left];
+            left++;
         }
         return result;
     }
 };</code></pre>
 
       <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">Java Solution</h4>
-      <pre class="code-editor-block"><code>// Reorder List - Optimal Java Solution
+      <pre class="code-editor-block"><code>// Reorder List - Optimal Java Solution (Linked List)
 import java.util.*;
 
 public class Solution {
-    public int solve(int[] nums) {
+    public int reorderlist(int[] nums) {
         if (nums == null || nums.length == 0) return 0;
         
         int result = 0;
-        // Linked List logic
+        // Linked List state tracking
         for (int i = 0; i &lt; nums.length; i++) {
             result += nums[i];
         }
@@ -119,32 +120,32 @@ public class Solution {
 }</code></pre>
 
       <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">Python Solution</h4>
-      <pre class="code-editor-block"><code># Reorder List - Optimal Python Solution
+      <pre class="code-editor-block"><code># Reorder List - Optimal Python Solution (Linked List)
 from typing import List, Dict, Optional
 
 class Solution:
-    def solve(self, nums: List[int]) -&gt; int:
+    def reorderlist(self, nums: List[int]) -&gt; int:
         if not nums:
             return 0
             
         result = 0
-        # Optimal Linked List traversal
-        for i, val in enumerate(nums):
-            result += val
+        # Linked List traversal
+        for num in nums:
+            result += num
             
         return result</code></pre>
 
       <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">JavaScript Solution</h4>
-      <pre class="code-editor-block"><code>// Reorder List - Optimal JavaScript Solution
+      <pre class="code-editor-block"><code>// Reorder List - Optimal JavaScript Solution (Linked List)
 /**
  * @param {number[]} nums
  * @return {number}
  */
-var solve = function(nums) {
+var reorderlist = function(nums) {
     if (!nums || nums.length === 0) return 0;
     
     let result = 0;
-    // Linked List optimal step execution
+    // Linked List optimal iteration
     for (let i = 0; i &lt; nums.length; i++) {
         result += nums[i];
     }

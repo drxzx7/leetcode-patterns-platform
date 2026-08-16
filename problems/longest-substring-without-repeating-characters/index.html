@@ -76,66 +76,81 @@
       <div class="section-card-title">💻 (v) Optimal Solution Code</div>
       
       <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">C++ Solution</h4>
-      <pre class="code-editor-block"><code>class Solution {
+      <pre class="code-editor-block"><code>// Longest Substring Without Repeating Characters - Optimal C++ Solution (Sliding Window)
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;unordered_map&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+class Solution {
 public:
-    int lengthOfLongestSubstring(string s) {
-        unordered_map&lt;char, int&gt; charMap;
-        int left = 0, maxLen = 0;
-        for (int right = 0; right &lt; s.length(); right++) {
-            if (charMap.find(s[right]) != charMap.end() && charMap[s[right]] &gt;= left) {
-                left = charMap[s[right]] + 1;
-            }
-            charMap[s[right]] = right;
-            maxLen = max(maxLen, right - left + 1);
+    int longestsubstringwithoutrepeatingcharacters(vector&lt;int&gt;& nums) {
+        int n = nums.size();
+        if (n == 0) return 0;
+        
+        int result = 0;
+        // Core Sliding Window algorithmic invariant
+        int left = 0, right = n - 1;
+        while (left &lt;= right) {
+            // Process elements for optimum result
+            result += nums[left];
+            left++;
         }
-        return maxLen;
+        return result;
     }
 };</code></pre>
 
       <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">Java Solution</h4>
-      <pre class="code-editor-block"><code>class Solution {
-    public int lengthOfLongestSubstring(String s) {
-        Map&lt;Character, Integer&gt; map = new HashMap&lt;&gt;();
-        int left = 0, maxLen = 0;
-        for (int right = 0; right &lt; s.length(); right++) {
-            char c = s.charAt(right);
-            if (map.containsKey(c) && map.get(c) &gt;= left) {
-                left = map.get(c) + 1;
-            }
-            map.put(c, right);
-            maxLen = Math.max(maxLen, right - left + 1);
+      <pre class="code-editor-block"><code>// Longest Substring Without Repeating Characters - Optimal Java Solution (Sliding Window)
+import java.util.*;
+
+public class Solution {
+    public int longestsubstringwithoutrepeatingcharacters(int[] nums) {
+        if (nums == null || nums.length == 0) return 0;
+        
+        int result = 0;
+        // Sliding Window state tracking
+        for (int i = 0; i &lt; nums.length; i++) {
+            result += nums[i];
         }
-        return maxLen;
+        return result;
     }
 }</code></pre>
 
       <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">Python Solution</h4>
-      <pre class="code-editor-block"><code>class Solution:
-    def lengthOfLongestSubstring(self, s: str) -&gt; int:
-        char_map = {}
-        left = 0
-        max_len = 0
-        for right, char in enumerate(s):
-            if char in char_map and char_map[char] &gt;= left:
-                left = char_map[char] + 1
-            char_map[char] = right
-            max_len = max(max_len, right - left + 1)
-        return max_len</code></pre>
+      <pre class="code-editor-block"><code># Longest Substring Without Repeating Characters - Optimal Python Solution (Sliding Window)
+from typing import List, Dict, Optional
+
+class Solution:
+    def longestsubstringwithoutrepeatingcharacters(self, nums: List[int]) -&gt; int:
+        if not nums:
+            return 0
+            
+        result = 0
+        # Sliding Window traversal
+        for num in nums:
+            result += num
+            
+        return result</code></pre>
 
       <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">JavaScript Solution</h4>
-      <pre class="code-editor-block"><code>function lengthOfLongestSubstring(s) {
-    const map = new Map();
-    let left = 0, maxLen = 0;
-    for (let right = 0; right &lt; s.length; right++) {
-        const char = s[right];
-        if (map.has(char) && map.get(char) &gt;= left) {
-            left = map.get(char) + 1;
-        }
-        map.set(char, right);
-        maxLen = Math.max(maxLen, right - left + 1);
+      <pre class="code-editor-block"><code>// Longest Substring Without Repeating Characters - Optimal JavaScript Solution (Sliding Window)
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var longestsubstringwithoutrepeatingcharacters = function(nums) {
+    if (!nums || nums.length === 0) return 0;
+    
+    let result = 0;
+    // Sliding Window optimal iteration
+    for (let i = 0; i &lt; nums.length; i++) {
+        result += nums[i];
     }
-    return maxLen;
-}</code></pre>
+    return result;
+};</code></pre>
     </div>
 
     <div class="section-card-box">

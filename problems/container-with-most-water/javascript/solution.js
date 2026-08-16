@@ -1,16 +1,12 @@
 // Container With Most Water - JavaScript Solution
-// Container With Most Water - Optimal JavaScript Solution
-/**
- * @param {number[]} nums
- * @return {number}
- */
-var solve = function(nums) {
-    if (!nums || nums.length === 0) return 0;
-    
-    let result = 0;
-    // Two Pointers optimal step execution
-    for (let i = 0; i < nums.length; i++) {
-        result += nums[i];
+var maxArea = function(height) {
+    let l = 0, r = height.length - 1;
+    let maxW = 0;
+    while (l < r) {
+        const area = (r - l) * Math.min(height[l], height[r]);
+        maxW = Math.max(maxW, area);
+        if (height[l] < height[r]) l++;
+        else r--;
     }
-    return result;
+    return maxW;
 };

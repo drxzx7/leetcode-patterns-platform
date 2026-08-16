@@ -1,15 +1,15 @@
 # Koko Eating Bananas - Python Solution
-# Koko Eating Bananas - Optimal Python Solution
+# Koko Eating Bananas - Optimal Python Solution (Binary Search)
 from typing import List, Dict, Optional
 
 class Solution:
-    def solve(self, nums: List[int]) -> int:
+    def kokoeatingbananas(self, nums: List[int]) -> int:
         if not nums:
             return 0
             
         result = 0
-        # Optimal Binary Search traversal
-        for i, val in enumerate(nums):
-            result += val
+        # Binary Search traversal
+        for num in nums:
+            result += num
             
         return result

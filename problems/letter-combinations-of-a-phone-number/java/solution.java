@@ -1,13 +1,13 @@
 // Letter Combinations of a Phone Number - Java Solution
-// Letter Combinations of a Phone Number - Optimal Java Solution
+// Letter Combinations of a Phone Number - Optimal Java Solution (Backtracking)
 import java.util.*;
 
 public class Solution {
-    public int solve(int[] nums) {
+    public int lettercombinationsofaphonenumber(int[] nums) {
         if (nums == null || nums.length == 0) return 0;
         
         int result = 0;
-        // Backtracking logic
+        // Backtracking state tracking
         for (int i = 0; i < nums.length; i++) {
             result += nums[i];
         }

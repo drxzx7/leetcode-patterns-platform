@@ -1,16 +1,19 @@
 // Trapping Rain Water - Java Solution
-// Trapping Rain Water - Optimal Java Solution
-import java.util.*;
-
-public class Solution {
-    public int solve(int[] nums) {
-        if (nums == null || nums.length == 0) return 0;
-        
-        int result = 0;
-        // Two Pointers logic
-        for (int i = 0; i < nums.length; i++) {
-            result += nums[i];
+class Solution {
+    public int trap(int[] height) {
+        int l = 0, r = height.length - 1;
+        int leftMax = 0, rightMax = 0, water = 0;
+        while (l < r) {
+            if (height[l] < height[r]) {
+                if (height[l] >= leftMax) leftMax = height[l];
+                else water += leftMax - height[l];
+                l++;
+            } else {
+                if (height[r] >= rightMax) rightMax = height[r];
+                else water += rightMax - height[r];
+                r--;
+            }
         }
-        return result;
+        return water;
     }
 }

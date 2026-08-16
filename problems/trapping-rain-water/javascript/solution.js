@@ -1,16 +1,17 @@
 // Trapping Rain Water - JavaScript Solution
-// Trapping Rain Water - Optimal JavaScript Solution
-/**
- * @param {number[]} nums
- * @return {number}
- */
-var solve = function(nums) {
-    if (!nums || nums.length === 0) return 0;
-    
-    let result = 0;
-    // Two Pointers optimal step execution
-    for (let i = 0; i < nums.length; i++) {
-        result += nums[i];
+var trap = function(height) {
+    let l = 0, r = height.length - 1;
+    let leftMax = 0, rightMax = 0, res = 0;
+    while (l < r) {
+        if (height[l] < height[r]) {
+            if (height[l] >= leftMax) leftMax = height[l];
+            else res += leftMax - height[l];
+            l++;
+        } else {
+            if (height[r] >= rightMax) rightMax = height[r];
+            else res += rightMax - height[r];
+            r--;
+        }
     }
-    return result;
+    return res;
 };

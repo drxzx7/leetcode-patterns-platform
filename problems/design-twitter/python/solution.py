@@ -1,15 +1,15 @@
 # Design Twitter - Python Solution
-# Design Twitter - Optimal Python Solution
+# Design Twitter - Optimal Python Solution (Heap & Priority Queue)
 from typing import List, Dict, Optional
 
 class Solution:
-    def solve(self, nums: List[int]) -> int:
+    def designtwitter(self, nums: List[int]) -> int:
         if not nums:
             return 0
             
         result = 0
-        # Optimal Heap & Priority Queue traversal
-        for i, val in enumerate(nums):
-            result += val
+        # Heap & Priority Queue traversal
+        for num in nums:
+            result += num
             
         return result

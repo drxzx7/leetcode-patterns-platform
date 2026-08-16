@@ -11,16 +11,17 @@ document.addEventListener('DOMContentLoaded', () => {
     all_problems: []
   };
 
-  let activeView = 'grid'; // 'grid' | 'canvas' | 'profile'
+  let activeView = 'grid'; // 'grid' | 'canvas'
   let activePatternFilter = 'all';
   let activeProblem = null;
   let activeLanguage = 'cpp';
 
   // DOM Elements
-  const gridSection = document.getElementById('gridSection');
+  const heroSection = document.getElementById('heroSection');
+  const patternsOverviewSection = document.getElementById('patternsOverviewSection');
   const filterSection = document.getElementById('filterSection');
+  const gridSection = document.getElementById('gridSection');
   const canvasSection = document.getElementById('canvasSection');
-  const profileSection = document.getElementById('profileSection');
 
   const viewGridBtn = document.getElementById('viewGridBtn');
   const viewCanvasBtn = document.getElementById('viewCanvasBtn');
@@ -33,11 +34,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const searchInput = document.getElementById('searchInput');
   const filterPillsRow = document.getElementById('filterPillsRow');
+  const patternsGridContainer = document.getElementById('patternsGridContainer');
   const problemsCardsGrid = document.getElementById('problemsCardsGrid');
 
   const problemModalBackdrop = document.getElementById('problemModalBackdrop');
   const modalCloseBtn = document.getElementById('modalCloseBtn');
   const copyCodeBtn = document.getElementById('copyCodeBtn');
+
+  const profileModalBackdrop = document.getElementById('profileModalBackdrop');
+  const profileModalCloseBtn = document.getElementById('profileModalCloseBtn');
 
   // Load Database (Static window object or fetch fallback)
   if (window.LEETCODE_DATA) {
@@ -57,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function initApp() {
     renderProfileData();
+    renderPatternsOverview();
     renderFilterPills();
     renderProblemsGrid();
     renderCanvasNodes();
@@ -64,21 +70,21 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ============================================================
-     👤 PROFILE DASHBOARD RENDERER
+     👤 PROFILE DATA POPULATION
      ============================================================ */
   function renderProfileData() {
     const p = appData.profile;
     if (!p) return;
 
     // Header & Pill
-    document.getElementById('userAvatarSm').src = p.avatar;
-    document.getElementById('userNameSm').textContent = p.username;
-
-    document.getElementById('userAvatarLg').src = p.avatar;
-    document.getElementById('userFullName').textContent = p.username;
-    document.getElementById('userHandle').textContent = `@${p.handle}`;
-    document.getElementById('userRank').textContent = `#${p.rank}`;
-    document.getElementById('userPercent').textContent = p.global_top_percent;
+    if (p.avatar) {
+      document.getElementById('userAvatarSm').src = p.avatar;
+      document.getElementById('userAvatarLg').src = p.avatar;
+    }
+    document.getElementById('userNameSm').textContent = p.username || 'Ahmad';
+    document.getElementById('userFullName').textContent = p.username || 'Ahmad';
+    document.getElementById('userHandle').textContent = `@${p.handle || 'x_drxzx_x'}`;
+    document.getElementById('userRank').textContent = `#${p.rank || '403,799'}`;
 
     // Badges
     const badgesRow = document.getElementById('userBadgesRow');
@@ -92,17 +98,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Counters
-    document.getElementById('statTotalSolved').textContent = `${p.total_solved}/${p.total_problems}`;
-    document.getElementById('statStreak').textContent = `🔥 ${p.streak}`;
-    document.getElementById('statAcceptance').textContent = p.acceptance_rate;
-    document.getElementById('statRating').textContent = p.contest_rating;
+    document.getElementById('statTotalSolved').textContent = p.total_solved || 342;
+    document.getElementById('statStreak').textContent = `🔥 ${p.streak || 54}`;
+    document.getElementById('statAcceptance').textContent = p.acceptance_rate || '47.1%';
+    document.getElementById('statRating').textContent = p.contest_rating || 1785;
 
     // Solved Bars
-    document.getElementById('easySolvedCount').textContent = `${p.easy_solved} / ${p.easy_total}`;
-    document.getElementById('medSolvedCount').textContent = `${p.medium_solved} / ${p.medium_total}`;
-    document.getElementById('hardSolvedCount').textContent = `${p.hard_solved} / ${p.hard_total}`;
+    document.getElementById('easySolvedCount').textContent = p.easy_solved || 99;
+    document.getElementById('medSolvedCount').textContent = p.medium_solved || 180;
+    document.getElementById('hardSolvedCount').textContent = p.hard_solved || 63;
 
-    // Heatmap Grid (112 cells = 4 weeks x 28 days)
+    // Heatmap Grid
     const heatmapGrid = document.getElementById('heatmapGrid');
     if (heatmapGrid) {
       let cellsHTML = '';
@@ -118,10 +124,45 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ============================================================
+     📋 10 DSA PATTERNS OVERVIEW CARDS
+     ============================================================ */
+  function renderPatternsOverview() {
+    if (!patternsGridContainer || !appData.patterns) return;
+
+    const numerals = ['(i)', '(ii)', '(iii)', '(iv)', '(v)', '(vi)', '(vii)', '(viii)', '(ix)', '(x)'];
+
+    patternsGridContainer.innerHTML = appData.patterns.map((pat, idx) => `
+      <div class="pattern-card" data-pattern="${pat.id}">
+        <div class="icon">${pat.icon}</div>
+        <h3 class="subheading-pink-ui">${numerals[idx] || ''} ${pat.name}</h3>
+        <p>${pat.description}</p>
+        <span class="count">${pat.total_problems} Problems</span>
+      </div>
+    `).join('');
+
+    patternsGridContainer.querySelectorAll('.pattern-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const patId = card.getAttribute('data-pattern');
+        activePatternFilter = patId;
+        
+        // Active pill update
+        filterPillsRow.querySelectorAll('.filter-pill-btn').forEach(b => {
+          b.classList.toggle('active', b.getAttribute('data-pattern') === patId);
+        });
+
+        renderProblemsGrid();
+        
+        // Scroll smoothly to problem matrix
+        filterSection.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  }
+
+  /* ============================================================
      🧩 FILTER PILLS & PROBLEMS GRID MATRIX
      ============================================================ */
   function renderFilterPills() {
-    if (!appData.patterns) return;
+    if (!appData.patterns || !filterPillsRow) return;
 
     let html = `<button class="filter-pill-btn active" data-pattern="all">All Patterns (100)</button>`;
     appData.patterns.forEach(pat => {
@@ -133,9 +174,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     filterPillsRow.innerHTML = html;
 
-    // Attach click events to pills
     filterPillsRow.querySelectorAll('.filter-pill-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
+      btn.addEventListener('click', () => {
         filterPillsRow.querySelectorAll('.filter-pill-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         activePatternFilter = btn.getAttribute('data-pattern');
@@ -183,6 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
       `).join('');
 
       const slug = p.title.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-');
+
       return `
         <div class="problem-card-item" data-id="${p.id}" data-slug="${slug}">
           <div class="card-top-header">
@@ -202,7 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <span class="lang-icon-tag">JS</span>
             </div>
             <div style="display: flex; gap: 8px; align-items: center;">
-              <a href="problems/${slug}/index.html" class="standalone-page-btn" style="font-size: 0.75rem; color: var(--text-muted); text-decoration: none; padding: 2px 8px; border-radius: 12px; background: rgba(255,255,255,0.06);" title="Open standalone page">📄 Page</a>
+              <a href="problems/${slug}/index.html" class="standalone-page-btn" style="font-size: 0.75rem; color: var(--text-muted); text-decoration: none; padding: 2px 8px; border-radius: 12px; background: rgba(255,255,255,0.06);" title="Open standalone file page">📄 Page</a>
               <div class="view-sol-link">View Solution ➔</div>
             </div>
           </div>
@@ -213,7 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Attach click listeners to problem cards
     problemsCardsGrid.querySelectorAll('.problem-card-item').forEach(card => {
       card.addEventListener('click', (e) => {
-        if (e.target.classList.contains('standalone-page-btn')) return; // Allow direct link navigate
+        if (e.target.classList.contains('standalone-page-btn')) return;
         const id = parseInt(card.getAttribute('data-id'));
         const prob = appData.all_problems.find(x => x.id === id);
         if (prob) openProblemModal(prob);
@@ -232,7 +273,6 @@ document.addEventListener('DOMContentLoaded', () => {
     container.innerHTML = '';
     svgLayer.innerHTML = '';
 
-    // Render Pattern nodes in a grid layout across canvas
     let leftOffset = 60;
     let topOffset = 40;
 
@@ -260,7 +300,6 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
 
       nodeDiv.addEventListener('click', () => {
-        // Switch to grid view filtered by this pattern
         activePatternFilter = pat.id;
         switchView('grid');
         renderFilterPills();
@@ -278,17 +317,12 @@ document.addEventListener('DOMContentLoaded', () => {
     activeProblem = prob;
     activeLanguage = 'cpp';
 
-    // Populate Title & ID
     document.getElementById('modalProblemId').textContent = `#${prob.id}`;
     document.getElementById('modalTitleText').textContent = prob.title;
 
-    // (i) Intuition
     document.getElementById('modalIntuitionContent').innerHTML = prob.intuition;
-
-    // (ii) Approach
     document.getElementById('modalApproachContent').innerHTML = prob.approach;
 
-    // (iii) Algorithm
     const stepsList = document.getElementById('modalAlgorithmSteps');
     if (prob.algorithm && Array.isArray(prob.algorithm)) {
       stepsList.innerHTML = prob.algorithm.map(step => `<li>${step}</li>`).join('');
@@ -296,36 +330,69 @@ document.addEventListener('DOMContentLoaded', () => {
       stepsList.innerHTML = `<li>Iterate over elements and apply ${prob.pattern} logic.</li>`;
     }
 
-    // (iv) Complexity
     document.getElementById('modalTimeCompVal').textContent = prob.time_complexity || prob.complexity?.time?.split(' - ')[0] || 'O(N)';
     document.getElementById('modalTimeCompDesc').textContent = prob.complexity?.time || 'Single pass algorithm traversal.';
     document.getElementById('modalSpaceCompVal').textContent = prob.space_complexity || prob.complexity?.space?.split(' - ')[0] || 'O(1)';
     document.getElementById('modalSpaceCompDesc').textContent = prob.complexity?.space || 'Auxiliary memory usage for state tracking.';
 
-    // (v) Optimal Solution Code
     updateModalCodeView();
 
-    // (vi) Summary
     document.getElementById('modalSummaryContent').innerHTML = prob.summary || `Core key takeaway for ${prob.title}.`;
 
-    // Open Modal
     problemModalBackdrop.classList.add('open');
+  }
+
+  function highlightSyntax(rawCode) {
+    if (!rawCode) return '';
+
+    // Escape HTML special chars
+    let escaped = rawCode
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+
+    // 1. Comments (Line starting with // or #)
+    escaped = escaped.replace(/(\/\/[^\n]*|#[^\n]*)/g, '<span class="token-comment">$1</span>');
+
+    // 2. Double-quoted and single-quoted Strings
+    escaped = escaped.replace(/(&quot;.*?&quot;|".*?"|'.*? me')/g, '<span class="token-string">$1</span>');
+
+    // 3. Keywords (Electric Blue)
+    const keywords = [
+      'class', 'public', 'private', 'protected', 'virtual', 'override', 'struct',
+      'return', 'for', 'while', 'if', 'else', 'switch', 'case', 'break', 'continue',
+      'def', 'function', 'const', 'let', 'var', 'import', 'from', 'package', 'using',
+      'namespace', 'include', 'new', 'delete', 'throw', 'try', 'catch', 'in', 'of', 'and', 'or', 'not'
+    ];
+    const kwRegex = new RegExp(`\\b(${keywords.join('|')})\\b`, 'g');
+    escaped = escaped.replace(kwRegex, '<span class="token-keyword">$1</span>');
+
+    // 4. Data Types & Collections (Neon Pink)
+    const types = [
+      'int', 'void', 'double', 'float', 'char', 'bool', 'boolean', 'long', 'short',
+      'vector', 'List', 'ArrayList', 'Map', 'HashMap', 'Set', 'HashSet', 'unordered_map',
+      'string', 'String', 'auto', 'self', 'Optional', 'Dict', 'Array'
+    ];
+    const typeRegex = new RegExp(`\\b(${types.join('|')})\\b`, 'g');
+    escaped = escaped.replace(typeRegex, '<span class="token-type">$1</span>');
+
+    // 5. Operators (Magenta Pink)
+    escaped = escaped.replace(/(\+|-|\*|\/|%|=|\band\b|\bor\b|\bnot\b)/g, '<span class="token-operator">$1</span>');
+
+    return escaped;
   }
 
   function updateModalCodeView() {
     if (!activeProblem || !activeProblem.solutions) return;
 
     const solObj = activeProblem.solutions[activeLanguage] || activeProblem.solutions['cpp'];
-    document.getElementById('modalCodeContainer').textContent = solObj.code || '// Code solution';
+    const rawCode = solObj.code || '// Code solution';
+    
+    document.getElementById('modalCodeContainer').innerHTML = highlightSyntax(rawCode);
     document.getElementById('modalLangExplanation').textContent = solObj.explanation || '';
 
-    // Active lang tab styling
     document.querySelectorAll('.lang-tab-btn').forEach(btn => {
-      if (btn.getAttribute('data-lang') === activeLanguage) {
-        btn.classList.add('active');
-      } else {
-        btn.classList.remove('active');
-      }
+      btn.classList.toggle('active', btn.getAttribute('data-lang') === activeLanguage);
     });
   }
 
@@ -334,14 +401,27 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ============================================================
+     👤 PROFILE MODAL (TOUCH PROFILE ICON TO OPEN)
+     ============================================================ */
+  function openProfileModal() {
+    profileModalBackdrop.classList.add('open');
+  }
+
+  function closeProfileModal() {
+    profileModalBackdrop.classList.remove('open');
+  }
+
+  /* ============================================================
      🎛️ EVENT LISTENERS & NAVIGATION
      ============================================================ */
   function switchView(viewName) {
     activeView = viewName;
-    gridSection.style.display = viewName === 'grid' || viewName === 'profile' ? 'block' : 'none';
-    filterSection.style.display = viewName === 'grid' || viewName === 'profile' ? 'block' : 'none';
+    
+    heroSection.style.display = viewName === 'grid' ? 'block' : 'none';
+    patternsOverviewSection.style.display = viewName === 'grid' ? 'block' : 'none';
+    gridSection.style.display = viewName === 'grid' ? 'block' : 'none';
+    filterSection.style.display = viewName === 'grid' ? 'block' : 'none';
     canvasSection.style.display = viewName === 'canvas' ? 'block' : 'none';
-    profileSection.style.display = viewName === 'canvas' ? 'none' : 'block';
 
     viewGridBtn.classList.toggle('active', viewName === 'grid');
     viewCanvasBtn.classList.toggle('active', viewName === 'canvas');
@@ -352,8 +432,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Navigation Toggles
     viewGridBtn.addEventListener('click', () => switchView('grid'));
     viewCanvasBtn.addEventListener('click', () => switchView('canvas'));
-    viewProfileBtn.addEventListener('click', () => switchView('profile'));
-    profilePillBtn.addEventListener('click', () => switchView('profile'));
+    viewProfileBtn.addEventListener('click', () => openProfileModal());
+    profilePillBtn.addEventListener('click', () => openProfileModal());
     brandBtn.addEventListener('click', () => switchView('grid'));
 
     // Search Input
@@ -361,7 +441,7 @@ document.addEventListener('DOMContentLoaded', () => {
       renderProblemsGrid();
     });
 
-    // Theme Toggle (Pink Dark / Pink Light)
+    // Theme Toggle
     themeToggleBtn.addEventListener('click', () => {
       document.body.classList.toggle('theme-light');
       themeToggleBtn.textContent = document.body.classList.contains('theme-light') ? '☀️' : '🌙';
@@ -374,17 +454,26 @@ document.addEventListener('DOMContentLoaded', () => {
       document.documentElement.style.setProperty('--font-base', `${nextScale}rem`);
     });
 
-    // Modal Close
+    // Problem Modal Close
     modalCloseBtn.addEventListener('click', closeProblemModal);
     problemModalBackdrop.addEventListener('click', (e) => {
       if (e.target === problemModalBackdrop) closeProblemModal();
     });
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeProblemModal();
+    // Profile Modal Close
+    profileModalCloseBtn.addEventListener('click', closeProfileModal);
+    profileModalBackdrop.addEventListener('click', (e) => {
+      if (e.target === profileModalBackdrop) closeProfileModal();
     });
 
-    // Modal 6-Section Tab Switcher
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeProblemModal();
+        closeProfileModal();
+      }
+    });
+
+    // Solution Modal Tabs Switcher
     document.querySelectorAll('.section-tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.section-tab-btn').forEach(b => b.classList.remove('active'));
@@ -396,7 +485,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Language Tab Switcher in Code Section
+    // Code Language Switcher
     document.querySelectorAll('.lang-tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         activeLanguage = btn.getAttribute('data-lang');

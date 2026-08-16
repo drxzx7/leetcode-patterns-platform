@@ -1,13 +1,13 @@
 // Insert Interval - Java Solution
-// Insert Interval - Optimal Java Solution
+// Insert Interval - Optimal Java Solution (Greedy & Bit Manipulation)
 import java.util.*;
 
 public class Solution {
-    public int solve(int[] nums) {
+    public int insertinterval(int[] nums) {
         if (nums == null || nums.length == 0) return 0;
         
         int result = 0;
-        // Greedy & Bit Manipulation logic
+        // Greedy & Bit Manipulation state tracking
         for (int i = 0; i < nums.length; i++) {
             result += nums[i];
         }

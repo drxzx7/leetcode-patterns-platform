@@ -1,16 +1,15 @@
 // Container With Most Water - Java Solution
-// Container With Most Water - Optimal Java Solution
-import java.util.*;
-
-public class Solution {
-    public int solve(int[] nums) {
-        if (nums == null || nums.length == 0) return 0;
-        
-        int result = 0;
-        // Two Pointers logic
-        for (int i = 0; i < nums.length; i++) {
-            result += nums[i];
+class Solution {
+    public int maxArea(int[] height) {
+        int maxWater = 0;
+        int left = 0, right = height.length - 1;
+        while (left < right) {
+            int w = right - left;
+            int h = Math.min(height[left], height[right]);
+            maxWater = Math.max(maxWater, w * h);
+            if (height[left] < height[right]) left++;
+            else right--;
         }
-        return result;
+        return maxWater;
     }
 }

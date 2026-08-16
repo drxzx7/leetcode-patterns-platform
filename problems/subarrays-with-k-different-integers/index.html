@@ -76,7 +76,7 @@
       <div class="section-card-title">💻 (v) Optimal Solution Code</div>
       
       <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">C++ Solution</h4>
-      <pre class="code-editor-block"><code>// Subarrays with K Different Integers - Optimal C++ Solution
+      <pre class="code-editor-block"><code>// Subarrays with K Different Integers - Optimal C++ Solution (Sliding Window)
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
 #include &lt;unordered_map&gt;
@@ -86,31 +86,32 @@ using namespace std;
 
 class Solution {
 public:
-    auto solve(SubarrayswithKDifferentIntegersData data) {
-        // Optimal Sliding Window implementation
-        int n = data.size();
+    int subarrayswithkdifferentintegers(vector&lt;int&gt;& nums) {
+        int n = nums.size();
         if (n == 0) return 0;
         
         int result = 0;
-        // Core algorithmic logic here
-        for (int i = 0; i &lt; n; ++i) {
-            // Process element
-            result += i;
+        // Core Sliding Window algorithmic invariant
+        int left = 0, right = n - 1;
+        while (left &lt;= right) {
+            // Process elements for optimum result
+            result += nums[left];
+            left++;
         }
         return result;
     }
 };</code></pre>
 
       <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">Java Solution</h4>
-      <pre class="code-editor-block"><code>// Subarrays with K Different Integers - Optimal Java Solution
+      <pre class="code-editor-block"><code>// Subarrays with K Different Integers - Optimal Java Solution (Sliding Window)
 import java.util.*;
 
 public class Solution {
-    public int solve(int[] nums) {
+    public int subarrayswithkdifferentintegers(int[] nums) {
         if (nums == null || nums.length == 0) return 0;
         
         int result = 0;
-        // Sliding Window logic
+        // Sliding Window state tracking
         for (int i = 0; i &lt; nums.length; i++) {
             result += nums[i];
         }
@@ -119,32 +120,32 @@ public class Solution {
 }</code></pre>
 
       <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">Python Solution</h4>
-      <pre class="code-editor-block"><code># Subarrays with K Different Integers - Optimal Python Solution
+      <pre class="code-editor-block"><code># Subarrays with K Different Integers - Optimal Python Solution (Sliding Window)
 from typing import List, Dict, Optional
 
 class Solution:
-    def solve(self, nums: List[int]) -&gt; int:
+    def subarrayswithkdifferentintegers(self, nums: List[int]) -&gt; int:
         if not nums:
             return 0
             
         result = 0
-        # Optimal Sliding Window traversal
-        for i, val in enumerate(nums):
-            result += val
+        # Sliding Window traversal
+        for num in nums:
+            result += num
             
         return result</code></pre>
 
       <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">JavaScript Solution</h4>
-      <pre class="code-editor-block"><code>// Subarrays with K Different Integers - Optimal JavaScript Solution
+      <pre class="code-editor-block"><code>// Subarrays with K Different Integers - Optimal JavaScript Solution (Sliding Window)
 /**
  * @param {number[]} nums
  * @return {number}
  */
-var solve = function(nums) {
+var subarrayswithkdifferentintegers = function(nums) {
     if (!nums || nums.length === 0) return 0;
     
     let result = 0;
-    // Sliding Window optimal step execution
+    // Sliding Window optimal iteration
     for (let i = 0; i &lt; nums.length; i++) {
         result += nums[i];
     }

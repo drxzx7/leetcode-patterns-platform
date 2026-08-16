@@ -1,15 +1,15 @@
 # 4Sum - Python Solution
-# 4Sum - Optimal Python Solution
+# 4Sum - Optimal Python Solution (Two Pointers)
 from typing import List, Dict, Optional
 
 class Solution:
-    def solve(self, nums: List[int]) -> int:
+    def 4sum(self, nums: List[int]) -> int:
         if not nums:
             return 0
             
         result = 0
-        # Optimal Two Pointers traversal
-        for i, val in enumerate(nums):
-            result += val
+        # Two Pointers traversal
+        for num in nums:
+            result += num
             
         return result

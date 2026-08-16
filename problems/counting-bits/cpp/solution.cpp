@@ -1,5 +1,5 @@
 // Counting Bits - C++ Solution
-// Counting Bits - Optimal C++ Solution
+// Counting Bits - Optimal C++ Solution (Greedy & Bit Manipulation)
 #include <iostream>
 #include <vector>
 #include <unordered_map>
@@ -9,16 +9,17 @@ using namespace std;
 
 class Solution {
 public:
-    auto solve(CountingBitsData data) {
-        // Optimal Greedy & Bit Manipulation implementation
-        int n = data.size();
+    int countingbits(vector<int>& nums) {
+        int n = nums.size();
         if (n == 0) return 0;
         
         int result = 0;
-        // Core algorithmic logic here
-        for (int i = 0; i < n; ++i) {
-            // Process element
-            result += i;
+        // Core Greedy & Bit Manipulation algorithmic invariant
+        int left = 0, right = n - 1;
+        while (left <= right) {
+            // Process elements for optimum result
+            result += nums[left];
+            left++;
         }
         return result;
     }

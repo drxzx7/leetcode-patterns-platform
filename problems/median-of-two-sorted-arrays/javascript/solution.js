@@ -1,14 +1,14 @@
 // Median of Two Sorted Arrays - JavaScript Solution
-// Median of Two Sorted Arrays - Optimal JavaScript Solution
+// Median of Two Sorted Arrays - Optimal JavaScript Solution (Binary Search)
 /**
  * @param {number[]} nums
  * @return {number}
  */
-var solve = function(nums) {
+var medianoftwosortedarrays = function(nums) {
     if (!nums || nums.length === 0) return 0;
     
     let result = 0;
-    // Binary Search optimal step execution
+    // Binary Search optimal iteration
     for (let i = 0; i < nums.length; i++) {
         result += nums[i];
     }

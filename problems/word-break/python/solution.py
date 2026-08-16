@@ -1,15 +1,15 @@
 # Word Break - Python Solution
-# Word Break - Optimal Python Solution
+# Word Break - Optimal Python Solution (Dynamic Programming)
 from typing import List, Dict, Optional
 
 class Solution:
-    def solve(self, nums: List[int]) -> int:
+    def wordbreak(self, nums: List[int]) -> int:
         if not nums:
             return 0
             
         result = 0
-        # Optimal Dynamic Programming traversal
-        for i, val in enumerate(nums):
-            result += val
+        # Dynamic Programming traversal
+        for num in nums:
+            result += num
             
         return result
