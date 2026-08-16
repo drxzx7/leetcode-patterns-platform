@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3Sum – Solutions & Analysis</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    .problem-page-container {
+      max-width: 960px;
+      margin: 100px auto 60px;
+      padding: 0 24px;
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--accent-pink);
+      text-decoration: none;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+    .back-btn:hover { text-decoration: underline; }
+  </style>
+</head>
+<body class="theme-dark">
+  <div class="bg-grid"></div>
+  <div class="bg-glow glow-1"></div>
+
+  <div class="problem-page-container">
+    <a href="../../index.html" class="back-btn">← Back to All Problems</a>
+    
+    <div class="section-card-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <span class="card-problem-id">#3</span>
+        <span class="card-difficulty-badge card-difficulty-medium">Medium</span>
+      </div>
+      <h1 style="font-family: 'Outfit', sans-serif; font-size: 2.2rem; margin-bottom: 8px;">3Sum</h1>
+      <div class="card-pattern-tag">🧩 Pattern: Two Pointers</div>
+    </div>
+
+    <!-- 6 Required Solution Sections -->
+    <div class="section-card-box" style="margin-top: 24px;">
+      <div class="section-card-title">💡 (i) Intuition</div>
+      <p style="line-height: 1.7;">Sort the array first. Fix one element `nums[i]`, then use Two Pointers (`left` and `right`) to find pairs that sum to `-nums[i]`. Skip duplicates to guarantee unique triplets.</p>
+    </div>
+
+    <div class="section-card-box">
+      <div class="section-card-title">🎯 (ii) Approach</div>
+      <p style="line-height: 1.7;">Sort `nums`. Iterate `i` from `0` to `n-3`. If `nums[i] > 0`, break early. Skip duplicate `nums[i]`. Set `left = i + 1` and `right = n - 1`. While `left < right`, check sum. If sum < 0, increment `left`. If sum > 0, decrement `right`. If sum == 0, save triplet and advance pointers past duplicates.</p>
+    </div>
+
+    <div class="section-card-box">
+      <div class="section-card-title">⚙️ (iii) Step-by-Step Algorithm</div>
+      <ol class="algo-steps-list">
+        <li>Sort the array `nums` in ascending order.</li><li>Iterate `i` from 0 to `nums.length - 2`.</li><li>Skip duplicate values for `nums[i]`.</li><li>Set two pointers: `left = i + 1` and `right = nums.length - 1`.</li><li>Compute `sum = nums[i] + nums[left] + nums[right]`.</li><li>Adjust pointers: increment `left` if sum < 0, decrement `right` if sum > 0.</li><li>If sum == 0, record triplet and skip adjacent duplicates for both `left` and `right`.</li>
+      </ol>
+    </div>
+
+    <div class="section-card-box">
+      <div class="section-card-title">📊 (iv) Complexity Analysis</div>
+      <div class="complexity-cards-grid" style="margin-top: 12px;">
+        <div class="complexity-card">
+          <strong>Time Complexity</strong>
+          <span class="comp-badge-tag">O(N)</span>
+        </div>
+        <div class="complexity-card">
+          <strong>Space Complexity</strong>
+          <span class="comp-badge-tag">O(1)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card-box">
+      <div class="section-card-title">💻 (v) Optimal Solution Code</div>
+      
+      <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">C++ Solution</h4>
+      <pre class="code-editor-block"><code>class Solution {
+public:
+    vector&lt;vector&lt;int&gt;&gt; threeSum(vector&lt;int&gt;& nums) {
+        vector&lt;vector&lt;int&gt;&gt; res;
+        sort(nums.begin(), nums.end());
+        
+        for (int i = 0; i &lt; nums.size(); i++) {
+            if (i &gt; 0 && nums[i] == nums[i-1]) continue;
+            int left = i + 1, right = nums.size() - 1;
+            while (left &lt; right) {
+                int sum = nums[i] + nums[left] + nums[right];
+                if (sum &lt; 0) left++;
+                else if (sum &gt; 0) right--;
+                else {
+                    res.push_back({nums[i], nums[left], nums[right]});
+                    while (left &lt; right && nums[left] == nums[left+1]) left++;
+                    while (left &lt; right && nums[right] == nums[right-1]) right--;
+                    left++; right--;
+                }
+            }
+        }
+        return res;
+    }
+};</code></pre>
+
+      <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">Java Solution</h4>
+      <pre class="code-editor-block"><code>class Solution {
+    public List&lt;List&lt;Integer&gt;&gt; threeSum(int[] nums) {
+        Arrays.sort(nums);
+        List&lt;List&lt;Integer&gt;&gt; res = new ArrayList&lt;&gt;();
+        
+        for (int i = 0; i &lt; nums.length - 2; i++) {
+            if (i &gt; 0 && nums[i] == nums[i - 1]) continue;
+            int left = i + 1, right = nums.length - 1;
+            while (left &lt; right) {
+                int sum = nums[i] + nums[left] + nums[right];
+                if (sum &lt; 0) left++;
+                else if (sum &gt; 0) right--;
+                else {
+                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                    while (left &lt; right && nums[left] == nums[left + 1]) left++;
+                    while (left &lt; right && nums[right] == nums[right - 1]) right--;
+                    left++; right--;
+                }
+            }
+        }
+        return res;
+    }
+}</code></pre>
+
+      <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">Python Solution</h4>
+      <pre class="code-editor-block"><code>class Solution:
+    def threeSum(self, nums: List[int]) -&gt; List[List[int]]:
+        res = []
+        nums.sort()
+        for i, a in enumerate(nums):
+            if i &gt; 0 and a == nums[i - 1]:
+                continue
+            l, r = i + 1, len(nums) - 1
+            while l &lt; r:
+                threeSum = a + nums[l] + nums[r]
+                if threeSum &gt; 0:
+                    r -= 1
+                elif threeSum &lt; 0:
+                    l += 1
+                else:
+                    res.append([a, nums[l], nums[r]])
+                    l += 1
+                    while nums[l] == nums[l - 1] and l &lt; r:
+                        l += 1
+        return res</code></pre>
+
+      <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">JavaScript Solution</h4>
+      <pre class="code-editor-block"><code>function threeSum(nums) {
+    const res = [];
+    nums.sort((a, b) =&gt; a - b);
+    for (let i = 0; i &lt; nums.length - 2; i++) {
+        if (i &gt; 0 && nums[i] === nums[i - 1]) continue;
+        let l = i + 1, r = nums.length - 1;
+        while (l &lt; r) {
+            const sum = nums[i] + nums[l] + nums[r];
+            if (sum &lt; 0) l++;
+            else if (sum &gt; 0) r--;
+            else {
+                res.push([nums[i], nums[l], nums[r]]);
+                while (l &lt; r && nums[l] === nums[l + 1]) l++;
+                while (l &lt; r && nums[r] === nums[r - 1]) r--;
+                l++; r--;
+            }
+        }
+    }
+    return res;
+}</code></pre>
+    </div>
+
+    <div class="section-card-box">
+      <div class="section-card-title">📌 (vi) Summary & Memory Hook</div>
+      <p style="line-height: 1.7;">**Key Takeaway**: Sort array first, fix 1st number, then use 2-pointer squeeze. Remember duplicate skipping!</p>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeetCode 100 Solutions • Make.com & Canva Aesthetic Platform</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- Google Fonts: Outfit, Plus Jakarta Sans, Fira Code -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body class="theme-dark">
+
+  <!-- ✨ Animated Background Grid & Glows -->
+  <div class="bg-grid"></div>
+  <div class="bg-glow glow-1"></div>
+  <div class="bg-glow glow-2"></div>
+  <div class="bg-glow glow-3"></div>
+
+  <!-- 🎨 CANVA-STYLE TOP WORKSPACE TOOLBAR -->
+  <header class="canva-topbar">
+    <div class="brand-wrapper" id="brandBtn">
+      <div class="brand-icon">💖</div>
+      <span class="brand-text">LeetCode Patterns</span>
+    </div>
+
+    <!-- View Switcher Tabs -->
+    <nav class="topbar-nav">
+      <button class="nav-btn active" id="viewGridBtn">
+        <span>🧩</span> Problem Matrix
+      </button>
+      <button class="nav-btn" id="viewCanvasBtn">
+        <span>⚡</span> Make.com Canvas
+      </button>
+      <button class="nav-btn" id="viewProfileBtn">
+        <span>👤</span> Profile & Stats
+      </button>
+    </nav>
+
+    <!-- Workspace Controls -->
+    <div class="topbar-controls">
+      <button class="icon-control-btn" id="themeToggleBtn" title="Toggle Pink Dark / Light Theme">
+        🌙
+      </button>
+      <button class="icon-control-btn" id="fontScaleBtn" title="Adjust Font Scale">
+        A<sup>+</sup>
+      </button>
+      <div class="profile-pill" id="profilePillBtn">
+        <img src="https://assets.leetcode.com/users/x_drxzx_x/avatar_1780635684.png" alt="Ahmad" class="profile-avatar-sm" id="userAvatarSm" />
+        <span class="profile-name-sm" id="userNameSm">Ahmad</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- 👤 LEETCODE PROFILE SHOWCASE SECTION -->
+  <section class="profile-section" id="profileSection">
+    <div class="profile-banner-card">
+      <div class="profile-grid-layout">
+        
+        <!-- Left: User Details Card -->
+        <div class="profile-user-card">
+          <div class="avatar-wrapper">
+            <img src="https://assets.leetcode.com/users/x_drxzx_x/avatar_1780635684.png" alt="Ahmad" class="user-avatar-lg" id="userAvatarLg" />
+            <div class="online-indicator"></div>
+          </div>
+          <h2 class="user-title-name" id="userFullName">Ahmad</h2>
+          <div class="user-handle" id="userHandle">@x_drxzx_x</div>
+          <div class="user-rank-badge">
+            🏆 Rank <span id="userRank">#403,799</span>
+          </div>
+          <a href="https://leetcode.com/u/x_drxzx_x/" target="_blank" class="nav-cta" style="margin-top: 12px; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-size: 0.82rem;">
+            <span>🔗</span> Official Profile
+          </a>
+          <div class="user-badges-row" id="userBadgesRow" style="margin-top: 16px;">
+            <!-- Badges dynamically injected -->
+          </div>
+        </div>
+
+        <!-- Right: Dashboard Stats -->
+        <div class="profile-stats-dashboard">
+          
+          <!-- Stat Counters -->
+          <div class="stats-counter-row">
+            <div class="stat-card-box">
+              <div class="stat-val-num" id="statTotalSolved">100/100</div>
+              <div class="stat-val-label">Problems Solved</div>
+            </div>
+            <div class="stat-card-box">
+              <div class="stat-val-num" id="statStreak">🔥 42</div>
+              <div class="stat-val-label">Day Active Streak</div>
+            </div>
+            <div class="stat-card-box">
+              <div class="stat-val-num" id="statAcceptance">84.5%</div>
+              <div class="stat-val-label">Acceptance Rate</div>
+            </div>
+            <div class="stat-card-box">
+              <div class="stat-val-num" id="statRating">1948</div>
+              <div class="stat-val-label">Contest Rating</div>
+            </div>
+          </div>
+
+          <!-- Difficulty Solved Bars -->
+          <div class="difficulty-bars-container">
+            <div class="diff-bar-item">
+              <div class="diff-bar-header">
+                <span class="diff-name-easy">Easy</span>
+                <span id="easySolvedCount">35 / 35</span>
+              </div>
+              <div class="diff-progress-track">
+                <div class="diff-progress-fill fill-easy" id="easyFillBar" style="width: 100%;"></div>
+              </div>
+            </div>
+            <div class="diff-bar-item">
+              <div class="diff-bar-header">
+                <span class="diff-name-medium">Medium</span>
+                <span id="medSolvedCount">50 / 50</span>
+              </div>
+              <div class="diff-progress-track">
+                <div class="diff-progress-fill fill-medium" id="medFillBar" style="width: 100%;"></div>
+              </div>
+            </div>
+            <div class="diff-bar-item">
+              <div class="diff-bar-header">
+                <span class="diff-name-hard">Hard</span>
+                <span id="hardSolvedCount">15 / 15</span>
+              </div>
+              <div class="diff-progress-track">
+                <div class="diff-progress-fill fill-hard" id="hardFillBar" style="width: 100%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Activity Heatmap -->
+          <div class="heatmap-container">
+            <div class="heatmap-title">📅 Submission Activity (Past Year)</div>
+            <div class="heatmap-cells-grid" id="heatmapGrid">
+              <!-- Heatmap cells injected by JS -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🧩 MAKE.COM WORKFLOW CANVAS SECTION (CANVAS VIEW MODE) -->
+  <section class="make-canvas-section" id="canvasSection" style="display: none;">
+    <div class="canvas-viewport-wrapper">
+      <div class="canvas-dot-bg"></div>
+      
+      <!-- SVG Connecting Curves Layer -->
+      <svg class="canvas-svg-layer" id="canvasSvgLayer"></svg>
+
+      <!-- Draggable / Scrollable Node Container -->
+      <div class="canvas-nodes-container" id="canvasNodesContainer">
+        <!-- Make.com Nodes injected dynamically by JS -->
+      </div>
+
+      <!-- Canvas Floating Zoom Controls -->
+      <div class="canvas-floating-controls">
+        <button class="canvas-ctrl-btn" id="zoomInBtn" title="Zoom In">+</button>
+        <button class="canvas-ctrl-btn" id="zoomOutBtn" title="Zoom Out">−</button>
+        <button class="canvas-ctrl-btn" id="resetZoomBtn" title="Reset Canvas View">⟲</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 📋 PROBLEM MATRIX & BENTO GRID SECTION (DEFAULT VIEW) -->
+  <section class="grid-filter-panel" id="filterSection">
+    <!-- Search Bar -->
+    <div class="filter-search-box">
+      <span>🔍</span>
+      <input type="text" id="searchInput" class="search-input-field" placeholder="Search 100 LeetCode problems by title, pattern, company (e.g. 'Two Sum', 'Google', 'Sliding Window')..." />
+    </div>
+
+    <!-- Filter Pills -->
+    <div class="filter-pills-row" id="filterPillsRow">
+      <button class="filter-pill-btn active" data-pattern="all">All Patterns (100)</button>
+      <!-- Pattern pills injected by JS -->
+    </div>
+  </section>
+
+  <section class="problems-grid-section" id="gridSection">
+    <div class="problems-cards-grid" id="problemsCardsGrid">
+      <!-- 100 Bento cards injected by JS -->
+    </div>
+  </section>
+
+  <!-- 💖 PROBLEM DETAIL MODAL (CONTAINING ALL 6 MANDATORY SECTIONS) -->
+  <div class="modal-backdrop" id="problemModalBackdrop">
+    <div class="problem-modal-container">
+      
+      <!-- Header -->
+      <div class="modal-header-bar">
+        <div class="modal-title-area">
+          <h2 id="modalProblemTitle">
+            <span class="card-problem-id" id="modalProblemId">#1</span>
+            <span id="modalTitleText">Two Sum</span>
+          </h2>
+        </div>
+        <button class="modal-close-btn" id="modalCloseBtn">&times;</button>
+      </div>
+
+      <!-- 6 Solution Section Navigation Tabs -->
+      <div class="modal-sections-tabs">
+        <button class="section-tab-btn active" data-tab="tab-intuition">💡 (i) Intuition</button>
+        <button class="section-tab-btn" data-tab="tab-approach">🎯 (ii) Approach</button>
+        <button class="section-tab-btn" data-tab="tab-algorithm">⚙️ (iii) Algorithm</button>
+        <button class="section-tab-btn" data-tab="tab-complexity">📊 (iv) Complexity</button>
+        <button class="section-tab-btn" data-tab="tab-solution">💻 (v) Optimal Solution</button>
+        <button class="section-tab-btn" data-tab="tab-summary">📌 (vi) Summary</button>
+      </div>
+
+      <!-- Modal Body Content -->
+      <div class="modal-body-content">
+        
+        <!-- Tab 1: Intuition -->
+        <div class="tab-pane active" id="tab-intuition">
+          <div class="section-card-box">
+            <div class="section-card-title">💡 Core Intuition</div>
+            <p id="modalIntuitionContent" style="line-height: 1.7; font-size: 1rem; color: var(--text-primary);"></p>
+          </div>
+        </div>
+
+        <!-- Tab 2: Approach -->
+        <div class="tab-pane" id="tab-approach">
+          <div class="section-card-box">
+            <div class="section-card-title">🎯 Detailed Approach</div>
+            <p id="modalApproachContent" style="line-height: 1.7; font-size: 1rem; color: var(--text-primary);"></p>
+          </div>
+        </div>
+
+        <!-- Tab 3: Algorithm -->
+        <div class="tab-pane" id="tab-algorithm">
+          <div class="section-card-box">
+            <div class="section-card-title">⚙️ Step-by-Step Algorithm</div>
+            <ol class="algo-steps-list" id="modalAlgorithmSteps">
+              <!-- Injected by JS -->
+            </ol>
+          </div>
+        </div>
+
+        <!-- Tab 4: Complexity -->
+        <div class="tab-pane" id="tab-complexity">
+          <div class="complexity-cards-grid">
+            <div class="complexity-card">
+              <div class="section-card-title">⏱️ Time Complexity</div>
+              <span class="comp-badge-tag" id="modalTimeCompVal">O(N)</span>
+              <p id="modalTimeCompDesc" style="margin-top: 8px; font-size: 0.88rem; color: var(--text-secondary);"></p>
+            </div>
+            <div class="complexity-card">
+              <div class="section-card-title">💾 Space Complexity</div>
+              <span class="comp-badge-tag" id="modalSpaceCompVal">O(N)</span>
+              <p id="modalSpaceCompDesc" style="margin-top: 8px; font-size: 0.88rem; color: var(--text-secondary);"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 5: Optimal Solution (4 Languages Tabs) -->
+        <div class="tab-pane" id="tab-solution">
+          <div class="section-card-box">
+            <div class="code-lang-switcher">
+              <div class="lang-tabs-group">
+                <button class="lang-tab-btn active" data-lang="cpp">C++</button>
+                <button class="lang-tab-btn" data-lang="java">Java</button>
+                <button class="lang-tab-btn" data-lang="python">Python</button>
+                <button class="lang-tab-btn" data-lang="javascript">JavaScript</button>
+              </div>
+              <button class="copy-code-btn" id="copyCodeBtn">📋 Copy Code</button>
+            </div>
+            <pre class="code-editor-block"><code id="modalCodeContainer"></code></pre>
+            <p id="modalLangExplanation" style="margin-top: 14px; font-size: 0.88rem; color: var(--text-secondary); font-style: italic;"></p>
+          </div>
+        </div>
+
+        <!-- Tab 6: Summary -->
+        <div class="tab-pane" id="tab-summary">
+          <div class="section-card-box">
+            <div class="section-card-title">📌 Pattern Summary & Memory Hook</div>
+            <p id="modalSummaryContent" style="line-height: 1.7; font-size: 1rem; color: var(--text-primary);"></p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="data/problems_data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

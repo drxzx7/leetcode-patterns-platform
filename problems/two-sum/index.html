@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Two Sum – Solutions & Analysis</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    .problem-page-container {
+      max-width: 960px;
+      margin: 100px auto 60px;
+      padding: 0 24px;
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--accent-pink);
+      text-decoration: none;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+    .back-btn:hover { text-decoration: underline; }
+  </style>
+</head>
+<body class="theme-dark">
+  <div class="bg-grid"></div>
+  <div class="bg-glow glow-1"></div>
+
+  <div class="problem-page-container">
+    <a href="../../index.html" class="back-btn">← Back to All Problems</a>
+    
+    <div class="section-card-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <span class="card-problem-id">#1</span>
+        <span class="card-difficulty-badge card-difficulty-easy">Easy</span>
+      </div>
+      <h1 style="font-family: 'Outfit', sans-serif; font-size: 2.2rem; margin-bottom: 8px;">Two Sum</h1>
+      <div class="card-pattern-tag">🧩 Pattern: Two Pointers</div>
+    </div>
+
+    <!-- 6 Required Solution Sections -->
+    <div class="section-card-box" style="margin-top: 24px;">
+      <div class="section-card-title">💡 (i) Intuition</div>
+      <p style="line-height: 1.7;">Instead of nested loops O(N²), store each number's complement (target - num) in a Hash Map for instant O(1) lookups.</p>
+    </div>
+
+    <div class="section-card-box">
+      <div class="section-card-title">🎯 (ii) Approach</div>
+      <p style="line-height: 1.7;">Single-pass Hash Table. As we iterate through `nums`, we calculate `complement = target - nums[i]`. If `complement` exists in our hash table, we found our pair! Otherwise, store `nums[i]: i`.</p>
+    </div>
+
+    <div class="section-card-box">
+      <div class="section-card-title">⚙️ (iii) Step-by-Step Algorithm</div>
+      <ol class="algo-steps-list">
+        <li>Initialize an empty HashMap `map` to store {number: index}.</li><li>Loop through `nums` with index `i`.</li><li>Calculate `complement = target - nums[i]`.</li><li>If `complement` exists in `map`, return `[map.get(complement), i]`.</li><li>Otherwise, insert `map.put(nums[i], i)`.</li><li>Return empty array if no pair found.</li>
+      </ol>
+    </div>
+
+    <div class="section-card-box">
+      <div class="section-card-title">📊 (iv) Complexity Analysis</div>
+      <div class="complexity-cards-grid" style="margin-top: 12px;">
+        <div class="complexity-card">
+          <strong>Time Complexity</strong>
+          <span class="comp-badge-tag">O(N)</span>
+        </div>
+        <div class="complexity-card">
+          <strong>Space Complexity</strong>
+          <span class="comp-badge-tag">O(1)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card-box">
+      <div class="section-card-title">💻 (v) Optimal Solution Code</div>
+      
+      <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">C++ Solution</h4>
+      <pre class="code-editor-block"><code>class Solution {
+public:
+    vector&lt;int&gt; twoSum(vector&lt;int&gt;& nums, int target) {
+        unordered_map&lt;int, int&gt; seen;
+        for (int i = 0; i &lt; nums.size(); i++) {
+            int complement = target - nums[i];
+            if (seen.find(complement) != seen.end()) {
+                return {seen[complement], i};
+            }
+            seen[nums[i]] = i;
+        }
+        return {};
+    }
+};</code></pre>
+
+      <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">Java Solution</h4>
+      <pre class="code-editor-block"><code>class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        Map&lt;Integer, Integer&gt; seen = new HashMap&lt;&gt;();
+        for (int i = 0; i &lt; nums.length; i++) {
+            int complement = target - nums[i];
+            if (seen.containsKey(complement)) {
+                return new int[]{seen.get(complement), i};
+            }
+            seen.put(nums[i], i);
+        }
+        return new int[]{};
+    }
+}</code></pre>
+
+      <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">Python Solution</h4>
+      <pre class="code-editor-block"><code>class Solution:
+    def twoSum(self, nums: List[int], target: int) -&gt; List[int]:
+        seen = {}
+        for i, num in enumerate(nums):
+            complement = target - num
+            if complement in seen:
+                return [seen[complement], i]
+            seen[num] = i
+        return []</code></pre>
+
+      <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">JavaScript Solution</h4>
+      <pre class="code-editor-block"><code>function twoSum(nums, target) {
+    const seen = new Map();
+    for (let i = 0; i &lt; nums.length; i++) {
+        const complement = target - nums[i];
+        if (seen.has(complement)) {
+            return [seen.get(complement), i];
+        }
+        seen.set(nums[i], i);
+    }
+    return [];
+}</code></pre>
+    </div>
+
+    <div class="section-card-box">
+      <div class="section-card-title">📌 (vi) Summary & Memory Hook</div>
+      <p style="line-height: 1.7;">**Key Takeaway**: Trade O(N) space for O(N) time complexity using a Hash Map to store complement indices.</p>
+    </div>
+  </div>
+</body>
+</html>

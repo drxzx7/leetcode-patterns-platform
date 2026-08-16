@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Longest Substring Without Repeating Characters – Solutions & Analysis</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    .problem-page-container {
+      max-width: 960px;
+      margin: 100px auto 60px;
+      padding: 0 24px;
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--accent-pink);
+      text-decoration: none;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+    .back-btn:hover { text-decoration: underline; }
+  </style>
+</head>
+<body class="theme-dark">
+  <div class="bg-grid"></div>
+  <div class="bg-glow glow-1"></div>
+
+  <div class="problem-page-container">
+    <a href="../../index.html" class="back-btn">← Back to All Problems</a>
+    
+    <div class="section-card-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <span class="card-problem-id">#11</span>
+        <span class="card-difficulty-badge card-difficulty-medium">Medium</span>
+      </div>
+      <h1 style="font-family: 'Outfit', sans-serif; font-size: 2.2rem; margin-bottom: 8px;">Longest Substring Without Repeating Characters</h1>
+      <div class="card-pattern-tag">🧩 Pattern: Sliding Window</div>
+    </div>
+
+    <!-- 6 Required Solution Sections -->
+    <div class="section-card-box" style="margin-top: 24px;">
+      <div class="section-card-title">💡 (i) Intuition</div>
+      <p style="line-height: 1.7;">Use a sliding window `[left, right]`. Expand `right` pointer to include characters, and store character indices in a map. If a duplicate is encountered inside window, jump `left` pointer past previous instance.</p>
+    </div>
+
+    <div class="section-card-box">
+      <div class="section-card-title">🎯 (ii) Approach</div>
+      <p style="line-height: 1.7;">Maintain a hash map `charMap` storing character -> index. Move `right` pointer across string. If character at `right` is present in map and its index >= `left`, update `left = charMap[char] + 1`. Calculate `maxLength = max(maxLength, right - left + 1)`.</p>
+    </div>
+
+    <div class="section-card-box">
+      <div class="section-card-title">⚙️ (iii) Step-by-Step Algorithm</div>
+      <ol class="algo-steps-list">
+        <li>Initialize `left = 0`, `maxLength = 0`, and Hash Map `map`.</li><li>Iterate `right` pointer from 0 to `s.length - 1`.</li><li>If character `s[right]` exists in `map` and its index >= `left`, set `left = map.get(s[right]) + 1`.</li><li>Update `map.put(s[right], right)`.</li><li>Compute current window size `right - left + 1` and update `maxLength`.</li><li>Return `maxLength`.</li>
+      </ol>
+    </div>
+
+    <div class="section-card-box">
+      <div class="section-card-title">📊 (iv) Complexity Analysis</div>
+      <div class="complexity-cards-grid" style="margin-top: 12px;">
+        <div class="complexity-card">
+          <strong>Time Complexity</strong>
+          <span class="comp-badge-tag">O(N)</span>
+        </div>
+        <div class="complexity-card">
+          <strong>Space Complexity</strong>
+          <span class="comp-badge-tag">O(N)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card-box">
+      <div class="section-card-title">💻 (v) Optimal Solution Code</div>
+      
+      <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">C++ Solution</h4>
+      <pre class="code-editor-block"><code>class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        unordered_map&lt;char, int&gt; charMap;
+        int left = 0, maxLen = 0;
+        for (int right = 0; right &lt; s.length(); right++) {
+            if (charMap.find(s[right]) != charMap.end() && charMap[s[right]] &gt;= left) {
+                left = charMap[s[right]] + 1;
+            }
+            charMap[s[right]] = right;
+            maxLen = max(maxLen, right - left + 1);
+        }
+        return maxLen;
+    }
+};</code></pre>
+
+      <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">Java Solution</h4>
+      <pre class="code-editor-block"><code>class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        Map&lt;Character, Integer&gt; map = new HashMap&lt;&gt;();
+        int left = 0, maxLen = 0;
+        for (int right = 0; right &lt; s.length(); right++) {
+            char c = s.charAt(right);
+            if (map.containsKey(c) && map.get(c) &gt;= left) {
+                left = map.get(c) + 1;
+            }
+            map.put(c, right);
+            maxLen = Math.max(maxLen, right - left + 1);
+        }
+        return maxLen;
+    }
+}</code></pre>
+
+      <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">Python Solution</h4>
+      <pre class="code-editor-block"><code>class Solution:
+    def lengthOfLongestSubstring(self, s: str) -&gt; int:
+        char_map = {}
+        left = 0
+        max_len = 0
+        for right, char in enumerate(s):
+            if char in char_map and char_map[char] &gt;= left:
+                left = char_map[char] + 1
+            char_map[char] = right
+            max_len = max(max_len, right - left + 1)
+        return max_len</code></pre>
+
+      <h4 style="margin: 16px 0 8px; color: var(--accent-pink);">JavaScript Solution</h4>
+      <pre class="code-editor-block"><code>function lengthOfLongestSubstring(s) {
+    const map = new Map();
+    let left = 0, maxLen = 0;
+    for (let right = 0; right &lt; s.length; right++) {
+        const char = s[right];
+        if (map.has(char) && map.get(char) &gt;= left) {
+            left = map.get(char) + 1;
+        }
+        map.set(char, right);
+        maxLen = Math.max(maxLen, right - left + 1);
+    }
+    return maxLen;
+}</code></pre>
+    </div>
+
+    <div class="section-card-box">
+      <div class="section-card-title">📌 (vi) Summary & Memory Hook</div>
+      <p style="line-height: 1.7;">**Key Takeaway**: Sliding window with hash map storing indices achieves single pass O(N) efficiency.</p>
+    </div>
+  </div>
+</body>
+</html>
