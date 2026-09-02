@@ -1,6 +1,7 @@
 /**
  * 💖 LEETCODE 100 SOLUTIONS PLATFORM
  * Make.com + Canva Aesthetic Interactive Frontend Application Logic
+ * Featuring Universal DSA Visualizer Engine for all 100 Problems
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -28,6 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const viewProfileBtn = document.getElementById('viewProfileBtn');
   const profilePillBtn = document.getElementById('profilePillBtn');
   const brandBtn = document.getElementById('brandBtn');
+
+  const heroExploreVisualizerBtn = document.getElementById('heroExploreVisualizerBtn');
+  const heroExploreGridBtn = document.getElementById('heroExploreGridBtn');
+  const heroProfileBtn = document.getElementById('heroProfileBtn');
 
   const themeToggleBtn = document.getElementById('themeToggleBtn');
   const fontScaleBtn = document.getElementById('fontScaleBtn');
@@ -61,6 +66,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function initApp() {
+    // Ensure all_problems is populated
+    if (!appData.all_problems || appData.all_problems.length === 0) {
+      appData.all_problems = [];
+      if (appData.patterns) {
+        appData.patterns.forEach(pat => {
+          if (pat.problems) {
+            appData.all_problems.push(...pat.problems);
+          }
+        });
+      }
+    }
+
     renderProfileData();
     renderPatternsOverview();
     renderFilterPills();
@@ -78,13 +95,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Header & Pill
     if (p.avatar) {
-      document.getElementById('userAvatarSm').src = p.avatar;
-      document.getElementById('userAvatarLg').src = p.avatar;
+      const avSm = document.getElementById('userAvatarSm');
+      const avLg = document.getElementById('userAvatarLg');
+      if (avSm) avSm.src = p.avatar;
+      if (avLg) avLg.src = p.avatar;
     }
-    document.getElementById('userNameSm').textContent = p.username || 'Ahmad';
-    document.getElementById('userFullName').textContent = p.username || 'Ahmad';
-    document.getElementById('userHandle').textContent = `@${p.handle || 'x_drxzx_x'}`;
-    document.getElementById('userRank').textContent = `#${p.rank || '403,799'}`;
+    const nameSm = document.getElementById('userNameSm');
+    const nameFull = document.getElementById('userFullName');
+    const handle = document.getElementById('userHandle');
+    const rank = document.getElementById('userRank');
+
+    if (nameSm) nameSm.textContent = 'Ahmad';
+    if (nameFull) nameFull.textContent = p.username || 'Ahmad Shuaib';
+    if (handle) handle.textContent = `@${p.handle || 'x_drxzx_x'}`;
+    if (rank) rank.textContent = `#${p.rank || '403,799'}`;
 
     // Badges
     const badgesRow = document.getElementById('userBadgesRow');
@@ -98,15 +122,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Counters
-    document.getElementById('statTotalSolved').textContent = p.total_solved || 342;
-    document.getElementById('statStreak').textContent = `🔥 ${p.streak || 54}`;
-    document.getElementById('statAcceptance').textContent = p.acceptance_rate || '47.1%';
-    document.getElementById('statRating').textContent = p.contest_rating || 1785;
+    const statTotal = document.getElementById('statTotalSolved');
+    const statStreak = document.getElementById('statStreak');
+    const statAcc = document.getElementById('statAcceptance');
+    const statRating = document.getElementById('statRating');
+
+    if (statTotal) statTotal.textContent = p.total_solved || 342;
+    if (statStreak) statStreak.textContent = `🔥 ${p.streak || 54}`;
+    if (statAcc) statAcc.textContent = p.acceptance_rate || '47.1%';
+    if (statRating) statRating.textContent = p.contest_rating || 1785;
 
     // Solved Bars
-    document.getElementById('easySolvedCount').textContent = p.easy_solved || 99;
-    document.getElementById('medSolvedCount').textContent = p.medium_solved || 180;
-    document.getElementById('hardSolvedCount').textContent = p.hard_solved || 63;
+    const easyCount = document.getElementById('easySolvedCount');
+    const medCount = document.getElementById('medSolvedCount');
+    const hardCount = document.getElementById('hardSolvedCount');
+
+    if (easyCount) easyCount.textContent = p.easy_solved || 99;
+    if (medCount) medCount.textContent = p.medium_solved || 180;
+    if (hardCount) hardCount.textContent = p.hard_solved || 63;
 
     // Heatmap Grid
     const heatmapGrid = document.getElementById('heatmapGrid');
@@ -136,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="icon">${pat.icon}</div>
         <h3 class="subheading-pink-ui">${numerals[idx] || ''} ${pat.name}</h3>
         <p>${pat.description}</p>
-        <span class="count">${pat.total_problems} Problems</span>
+        <span class="count">${pat.total_problems || (pat.problems ? pat.problems.length : 10)} Problems</span>
       </div>
     `).join('');
 
@@ -166,9 +199,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let html = `<button class="filter-pill-btn active" data-pattern="all">All Patterns (100)</button>`;
     appData.patterns.forEach(pat => {
+      const count = pat.total_problems || (pat.problems ? pat.problems.length : 10);
       html += `
         <button class="filter-pill-btn" data-pattern="${pat.id}">
-          ${pat.icon} ${pat.name} (${pat.total_problems})
+          ${pat.icon} ${pat.name} (${count})
         </button>
       `;
     });
@@ -197,8 +231,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (query) {
       filtered = filtered.filter(p =>
         p.title.toLowerCase().includes(query) ||
-        p.pattern.toLowerCase().includes(query) ||
-        p.difficulty.toLowerCase().includes(query) ||
+        (p.pattern && p.pattern.toLowerCase().includes(query)) ||
+        (p.difficulty && p.difficulty.toLowerCase().includes(query)) ||
         (p.companies && p.companies.some(c => c.toLowerCase().includes(query)))
       );
     }
@@ -208,7 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--text-muted);">
           <div style="font-size: 3rem; margin-bottom: 12px;">🔍</div>
           <h3>No matching LeetCode problems found</h3>
-          <p>Try searching for another pattern or title like 'Two Sum' or 'Sliding Window'</p>
+          <p>Try searching for another pattern or title like 'Two Sum', 'Sliding Window', or 'Binary Search'</p>
         </div>
       `;
       return;
@@ -218,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const diffClass = p.difficulty === 'Easy' ? 'card-difficulty-easy' :
                         p.difficulty === 'Medium' ? 'card-difficulty-medium' : 'card-difficulty-hard';
 
-      const companyBadges = (p.companies || []).slice(0, 3).map(c => `
+      const companyBadges = (p.companies || ['Google', 'Amazon']).slice(0, 3).map(c => `
         <span class="company-pill">${c}</span>
       `).join('');
 
@@ -231,7 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <span class="card-difficulty-badge ${diffClass}">${p.difficulty}</span>
           </div>
           <h3 class="card-problem-title">${p.title}</h3>
-          <div class="card-pattern-tag">🧩 ${p.pattern}</div>
+          <div class="card-pattern-tag">🧩 ${p.pattern || 'DSA Pattern'}</div>
           <div class="card-companies-row">
             ${companyBadges}
           </div>
@@ -242,9 +276,9 @@ document.addEventListener('DOMContentLoaded', () => {
               <span class="lang-icon-tag">Python</span>
               <span class="lang-icon-tag">JS</span>
             </div>
-            <div style="display: flex; gap: 8px; align-items: center;">
-              <a href="problems/${slug}/index.html" class="standalone-page-btn" style="font-size: 0.75rem; color: var(--text-muted); text-decoration: none; padding: 2px 8px; border-radius: 12px; background: rgba(255,255,255,0.06);" title="Open standalone file page">📄 Page</a>
-              <div class="view-sol-link">View Solution ➔</div>
+            <div class="card-actions-right">
+              <button class="card-viz-btn" data-id="${p.id}" title="Launch Interactive Visualizer">▶️ Visualizer</button>
+              <div class="view-sol-link">Solution ➔</div>
             </div>
           </div>
         </div>
@@ -254,10 +288,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Attach click listeners to problem cards
     problemsCardsGrid.querySelectorAll('.problem-card-item').forEach(card => {
       card.addEventListener('click', (e) => {
-        if (e.target.classList.contains('standalone-page-btn')) return;
         const id = parseInt(card.getAttribute('data-id'));
         const prob = appData.all_problems.find(x => x.id === id);
-        if (prob) openProblemModal(prob);
+        if (prob) {
+          openProblemModal(prob, 'tab-visualizer');
+        }
       });
     });
   }
@@ -291,7 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="node-header-row">
           <div class="node-icon-badge">${pat.icon}</div>
           <span style="font-size: 0.75rem; font-weight: 700; color: var(--accent-pink); background: rgba(255,117,140,0.1); padding: 2px 8px; border-radius: 10px;">
-            ${pat.total_problems} Problems
+            ${pat.total_problems || 10} Problems
           </span>
         </div>
         <h4 class="node-title">${pat.name}</h4>
@@ -311,23 +346,29 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ============================================================
-     💖 PROBLEM SOLUTION MODAL (ALL 6 REQUIRED SECTIONS)
+     💖 PROBLEM SOLUTION MODAL & INTERACTIVE VISUALIZER LAUNCHER
      ============================================================ */
-  function openProblemModal(prob) {
+  function openProblemModal(prob, targetTabId = 'tab-visualizer') {
     activeProblem = prob;
     activeLanguage = 'cpp';
 
     document.getElementById('modalProblemId').textContent = `#${prob.id}`;
     document.getElementById('modalTitleText').textContent = prob.title;
+    
+    const patChip = document.getElementById('modalPatternChip');
+    if (patChip) patChip.textContent = `🧩 ${prob.pattern || 'DSA'}`;
 
-    document.getElementById('modalIntuitionContent').innerHTML = prob.intuition;
-    document.getElementById('modalApproachContent').innerHTML = prob.approach;
+    const lcLink = document.getElementById('modalLcDirectLink');
+    if (lcLink) lcLink.href = prob.link || `https://leetcode.com/problemset/all/?search=${encodeURIComponent(prob.title)}`;
+
+    document.getElementById('modalIntuitionContent').innerHTML = prob.intuition || 'Core intuitive breakdown for optimal pattern application.';
+    document.getElementById('modalApproachContent').innerHTML = prob.approach || 'Systematic invariant scanning and optimal computational state traversal.';
 
     const stepsList = document.getElementById('modalAlgorithmSteps');
     if (prob.algorithm && Array.isArray(prob.algorithm)) {
       stepsList.innerHTML = prob.algorithm.map(step => `<li>${step}</li>`).join('');
     } else {
-      stepsList.innerHTML = `<li>Iterate over elements and apply ${prob.pattern} logic.</li>`;
+      stepsList.innerHTML = `<li>Initialize state pointers or data structures for ${prob.pattern}.</li><li>Iterate through input while maintaining invariants.</li><li>Return calculated optimum result.</li>`;
     }
 
     document.getElementById('modalTimeCompVal').textContent = prob.time_complexity || prob.complexity?.time?.split(' - ')[0] || 'O(N)';
@@ -337,59 +378,133 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updateModalCodeView();
 
-    document.getElementById('modalSummaryContent').innerHTML = prob.summary || `Core key takeaway for ${prob.title}.`;
+    document.getElementById('modalSummaryContent').innerHTML = prob.summary || `**Key Takeaway for ${prob.title}**: Remember to utilize **${prob.pattern}** whenever given sorted data, contiguous sub-arrays, or optimal decision choices.`;
+
+    // Activate the requested tab
+    document.querySelectorAll('.section-tab-btn').forEach(b => {
+      b.classList.toggle('active', b.getAttribute('data-tab') === targetTabId);
+    });
+    document.querySelectorAll('.tab-pane').forEach(p => {
+      p.classList.toggle('active', p.id === targetTabId);
+    });
+
+    // Mount Interactive Visualizer for this problem
+    const mountPoint = document.getElementById('problemVisualizerMount');
+    if (mountPoint && window.DSAVisualizer) {
+      window.DSAVisualizer.mount(mountPoint, prob);
+    }
 
     problemModalBackdrop.classList.add('open');
   }
 
-  function highlightSyntax(rawCode) {
-    if (!rawCode) return '';
+  function highlightSyntax(rawCode, lang = 'cpp') {
+    if (!rawCode) return '<div class="code-line"><span class="line-num">1</span><span class="line-content">// No solution code available</span></div>';
 
-    // Escape HTML special chars
-    let escaped = rawCode
+    // Escape basic HTML entities first
+    let code = rawCode
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;');
 
-    // 1. Comments (Line starting with // or #)
-    escaped = escaped.replace(/(\/\/[^\n]*|#[^\n]*)/g, '<span class="token-comment">$1</span>');
-
-    // 2. Double-quoted and single-quoted Strings
-    escaped = escaped.replace(/(&quot;.*?&quot;|".*?"|'.*? me')/g, '<span class="token-string">$1</span>');
-
-    // 3. Keywords (Electric Blue)
-    const keywords = [
-      'class', 'public', 'private', 'protected', 'virtual', 'override', 'struct',
-      'return', 'for', 'while', 'if', 'else', 'switch', 'case', 'break', 'continue',
-      'def', 'function', 'const', 'let', 'var', 'import', 'from', 'package', 'using',
-      'namespace', 'include', 'new', 'delete', 'throw', 'try', 'catch', 'in', 'of', 'and', 'or', 'not'
+    // Common Keywords across C++, Java, Python, JS
+    const commonKeywords = [
+      'return', 'if', 'else', 'for', 'while', 'do', 'switch', 'case', 'break', 'continue',
+      'class', 'public', 'private', 'protected', 'virtual', 'override', 'static', 'const',
+      'new', 'delete', 'throw', 'try', 'catch', 'finally', 'import', 'from', 'package',
+      'using', 'namespace', 'typedef', 'struct', 'enum', 'interface', 'extends', 'implements',
+      'def', 'function', 'let', 'var', 'async', 'await', 'yield', 'lambda', 'self', 'this',
+      'in', 'of', 'and', 'or', 'not', 'is', 'None', 'True', 'False', 'true', 'false', 'null',
+      'undefined', 'auto', 'decltype', 'template', 'typename', 'sizeof'
     ];
-    const kwRegex = new RegExp(`\\b(${keywords.join('|')})\\b`, 'g');
-    escaped = escaped.replace(kwRegex, '<span class="token-keyword">$1</span>');
 
-    // 4. Data Types & Collections (Neon Pink)
-    const types = [
-      'int', 'void', 'double', 'float', 'char', 'bool', 'boolean', 'long', 'short',
-      'vector', 'List', 'ArrayList', 'Map', 'HashMap', 'Set', 'HashSet', 'unordered_map',
-      'string', 'String', 'auto', 'self', 'Optional', 'Dict', 'Array'
+    // Common Types & Data Structures
+    const commonTypes = [
+      'int', 'long', 'float', 'double', 'char', 'bool', 'boolean', 'void', 'short', 'byte',
+      'vector', 'string', 'String', 'pair', 'unordered_map', 'unordered_set', 'map', 'set',
+      'queue', 'deque', 'stack', 'priority_queue', 'List', 'ArrayList', 'LinkedList',
+      'HashMap', 'HashSet', 'TreeMap', 'TreeSet', 'Map', 'Set', 'Array', 'Object',
+      'Optional', 'Dict', 'Tuple', 'ListNode', 'TreeNode', 'Node'
     ];
-    const typeRegex = new RegExp(`\\b(${types.join('|')})\\b`, 'g');
-    escaped = escaped.replace(typeRegex, '<span class="token-type">$1</span>');
 
-    // 5. Operators (Magenta Pink)
-    escaped = escaped.replace(/(\+|-|\*|\/|%|=|\band\b|\bor\b|\bnot\b)/g, '<span class="token-operator">$1</span>');
+    const lines = code.split('\n');
+    const highlightedLines = lines.map((line, lineIdx) => {
+      let comment = '';
+      let codePart = line;
 
-    return escaped;
+      // 1. Line comments
+      const commentMatch = line.match(/(\/\/.*$|#.*$)/);
+      if (commentMatch) {
+        const idx = commentMatch.index;
+        comment = `<span class="token-comment">${commentMatch[0]}</span>`;
+        codePart = line.substring(0, idx);
+      }
+
+      // 2. Strings & Character literals
+      const strings = [];
+      codePart = codePart.replace(/(["'])(?:(?=(\\?))\2.)*?\1/g, (match) => {
+        const ph = `___STR_PH_${strings.length}___`;
+        strings.push(`<span class="token-string">${match}</span>`);
+        return ph;
+      });
+
+      // 3. Numbers
+      codePart = codePart.replace(/\b(\d+(?:\.\d+)?)\b/g, '<span class="token-number">$1</span>');
+
+      // 4. Keywords
+      const kwRegex = new RegExp(`\\b(${commonKeywords.join('|')})\\b`, 'g');
+      codePart = codePart.replace(kwRegex, '<span class="token-keyword">$1</span>');
+
+      // 5. Types
+      const typeRegex = new RegExp(`\\b(${commonTypes.join('|')})\\b`, 'g');
+      codePart = codePart.replace(typeRegex, '<span class="token-type">$1</span>');
+
+      // 6. Function calls (e.g., twoSum, push, pop, solve)
+      codePart = codePart.replace(/\b([a-zA-Z_]\w*)(?=\s*\()/g, '<span class="token-fn">$1</span>');
+
+      // Restore strings
+      strings.forEach((strHtml, i) => {
+        codePart = codePart.replace(`___STR_PH_${i}___`, strHtml);
+      });
+
+      const fullLineContent = codePart + comment;
+      const lineNum = lineIdx + 1;
+      return `<div class="code-line"><span class="line-num">${lineNum}</span><span class="line-content">${fullLineContent || ' '}</span></div>`;
+    });
+
+    return highlightedLines.join('');
   }
 
   function updateModalCodeView() {
     if (!activeProblem || !activeProblem.solutions) return;
 
-    const solObj = activeProblem.solutions[activeLanguage] || activeProblem.solutions['cpp'];
+    const solObj = activeProblem.solutions[activeLanguage] || activeProblem.solutions['cpp'] || {};
     const rawCode = solObj.code || '// Code solution';
     
-    document.getElementById('modalCodeContainer').innerHTML = highlightSyntax(rawCode);
-    document.getElementById('modalLangExplanation').textContent = solObj.explanation || '';
+    const langNames = {
+      cpp: '⚡ C++ (Optimal Solution)',
+      java: '☕ Java (Collections Framework)',
+      python: '🐍 Python 3 (Pythonic Optimal)',
+      javascript: '🟨 JavaScript (Modern ES6+)'
+    };
+
+    const langBadge = document.getElementById('activeLangBadge');
+    if (langBadge) {
+      langBadge.textContent = langNames[activeLanguage] || activeLanguage.toUpperCase();
+    }
+
+    const codeContainer = document.getElementById('modalCodeContainer');
+    if (codeContainer) {
+      codeContainer.innerHTML = highlightSyntax(rawCode, activeLanguage);
+    }
+
+    const explanationBox = document.getElementById('modalLangExplanation');
+    if (explanationBox) {
+      explanationBox.innerHTML = `
+        <div class="lang-tip-pill">
+          <strong>💡 ${langNames[activeLanguage] || 'Language Insights'}:</strong> ${solObj.explanation || 'Clean, efficient implementation adhering to LeetCode pattern standards.'}
+        </div>
+      `;
+    }
 
     document.querySelectorAll('.lang-tab-btn').forEach(btn => {
       btn.classList.toggle('active', btn.getAttribute('data-lang') === activeLanguage);
@@ -397,11 +512,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function closeProblemModal() {
+    if (window.DSAVisualizer) {
+      window.DSAVisualizer.stop();
+    }
     problemModalBackdrop.classList.remove('open');
   }
 
   /* ============================================================
-     👤 PROFILE MODAL (TOUCH PROFILE ICON TO OPEN)
+     👤 PROFILE MODAL
      ============================================================ */
   function openProfileModal() {
     profileModalBackdrop.classList.add('open');
@@ -417,7 +535,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function switchView(viewName) {
     activeView = viewName;
     
-    heroSection.style.display = viewName === 'grid' ? 'block' : 'none';
+    heroSection.style.display = viewName === 'grid' ? 'flex' : 'none';
     patternsOverviewSection.style.display = viewName === 'grid' ? 'block' : 'none';
     gridSection.style.display = viewName === 'grid' ? 'block' : 'none';
     filterSection.style.display = viewName === 'grid' ? 'block' : 'none';
@@ -435,6 +553,26 @@ document.addEventListener('DOMContentLoaded', () => {
     viewProfileBtn.addEventListener('click', () => openProfileModal());
     profilePillBtn.addEventListener('click', () => openProfileModal());
     brandBtn.addEventListener('click', () => switchView('grid'));
+
+    // Hero Action Buttons
+    if (heroExploreVisualizerBtn) {
+      heroExploreVisualizerBtn.addEventListener('click', () => {
+        const firstProb = appData.all_problems[0] || { id: 1, title: 'Two Sum', patternId: 'two-pointers' };
+        openProblemModal(firstProb, 'tab-visualizer');
+      });
+    }
+
+    if (heroExploreGridBtn) {
+      heroExploreGridBtn.addEventListener('click', () => {
+        filterSection.scrollIntoView({ behavior: 'smooth' });
+      });
+    }
+
+    if (heroProfileBtn) {
+      heroProfileBtn.addEventListener('click', () => {
+        openProfileModal();
+      });
+    }
 
     // Search Input
     searchInput.addEventListener('input', () => {
@@ -481,7 +619,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         btn.classList.add('active');
         const targetId = btn.getAttribute('data-tab');
-        document.getElementById(targetId).classList.add('active');
+        const targetPane = document.getElementById(targetId);
+        if (targetPane) targetPane.classList.add('active');
+
+        // If switched away from visualizer, pause play interval
+        if (targetId !== 'tab-visualizer' && window.DSAVisualizer) {
+          window.DSAVisualizer.stop();
+        }
       });
     });
 
@@ -495,8 +639,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Copy Code Button
     copyCodeBtn.addEventListener('click', () => {
-      const codeText = document.getElementById('modalCodeContainer').textContent;
-      navigator.clipboard.writeText(codeText).then(() => {
+      let codeToCopy = '';
+      if (activeProblem && activeProblem.solutions && activeProblem.solutions[activeLanguage]) {
+        codeToCopy = activeProblem.solutions[activeLanguage].code || '';
+      } else {
+        codeToCopy = document.getElementById('modalCodeContainer').innerText || '';
+      }
+
+      navigator.clipboard.writeText(codeToCopy).then(() => {
         const origText = copyCodeBtn.innerHTML;
         copyCodeBtn.innerHTML = '✨ Copied!';
         setTimeout(() => {

@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LeetCode 100 Solutions • Make.com & Canva Aesthetic Platform</title>
+  <title>LeetCode 100 Solutions • Interactive DSA Visualizer & Pattern Platform</title>
+  <meta name="description" content="Master 100 LeetCode DSA Problems with live interactive visualizers, step-by-step animations, 10 core patterns, multi-language optimal solutions (C++, Java, Python, JS), and developer portfolio by Ahmad Shuaib." />
   <link rel="stylesheet" href="css/style.css" />
   <!-- Google Fonts: Outfit, Plus Jakarta Sans, Fira Code -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -38,60 +39,118 @@
       </button>
     </nav>
 
-    <!-- Workspace Controls -->
+    <!-- Workspace Controls & Social Quick Links -->
     <div class="topbar-controls">
+      <!-- Social Quick Badges -->
+      <a href="https://leetcode.com/u/x_drxzx_x/" target="_blank" rel="noopener noreferrer" class="social-quick-btn lc-badge" title="Ahmad Shuaib's LeetCode Profile (342+ Solved)">
+        <span class="soc-icon">🟡</span> <span class="soc-text">LeetCode</span>
+      </a>
+      <a href="https://github.com/drxzx7" target="_blank" rel="noopener noreferrer" class="social-quick-btn gh-badge" title="Ahmad Shuaib's GitHub (@drxzx7)">
+        <span class="soc-icon">🐙</span> <span class="soc-text">GitHub</span>
+      </a>
+      <a href="https://www.linkedin.com/in/ahmad-shuaib-75543037a" target="_blank" rel="noopener noreferrer" class="social-quick-btn in-badge" title="Ahmad Shuaib's LinkedIn Profile">
+        <span class="soc-icon">💼</span> <span class="soc-text">LinkedIn</span>
+      </a>
+
       <button class="icon-control-btn" id="themeToggleBtn" title="Toggle Pink Dark / Light Theme">
         🌙
       </button>
       <button class="icon-control-btn" id="fontScaleBtn" title="Adjust Font Scale">
         A<sup>+</sup>
       </button>
-      <div class="profile-pill" id="profilePillBtn" title="Touch to view LeetCode Profile & Progress">
-        <img src="https://assets.leetcode.com/users/x_drxzx_x/avatar_1780635684.png" alt="Ahmad" class="profile-avatar-sm" id="userAvatarSm" />
+      <div class="profile-pill" id="profilePillBtn" title="Touch to view Ahmad's LeetCode Profile & Statistics">
+        <img src="https://assets.leetcode.com/users/x_drxzx_x/avatar_1780635684.png" alt="Ahmad Shuaib" class="profile-avatar-sm" id="userAvatarSm" />
         <span class="profile-name-sm" id="userNameSm">Ahmad</span>
       </div>
     </div>
   </header>
 
-  <!-- 🚀 HERO SECTION (FIRST PAGE) -->
+  <!-- 🚀 HERO SECTION (PERFECTLY CENTER ALIGNED) -->
   <header class="hero" id="heroSection">
     <div class="hero-content">
-      <div class="badge">
+      
+      <!-- Central Top Badge -->
+      <div class="badge hero-badge-center">
         <span class="badge-dot"></span>
-        🔥 100 LeetCode Problem Solutions (C++, Java, Python, JS)
+        <span class="badge-text-content">🔥 100 LeetCode Problem Solutions (C++, Java, Python, JS)</span>
       </div>
-      <h1 style="font-family: 'Outfit', sans-serif; font-size: 3.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 16px;">
+
+      <!-- Main Headline -->
+      <h1 class="hero-main-title">
         <span class="blue-text-highlight">Master DSA with</span><br />
         <span class="gradient-text">Pattern-Based Learning</span>
       </h1>
-      <p style="font-size: 1.1rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto 28px;">
-        Visual algorithm breakdowns • Multi-language optimal code • Live search & pattern filters
+
+      <!-- Subtitle -->
+      <p class="hero-subtitle">
+        Interactive DSA visualizers • Multi-language optimal solutions • Deep pattern mastery • Real-time algorithm simulations
       </p>
 
-      <div class="quick-stats" style="display: flex; justify-content: center; gap: 32px; margin-bottom: 32px;">
+      <!-- Creator Portfolio Attribution Pill -->
+      <div class="hero-creator-card">
+        <span class="creator-badge-label">Built by</span>
+        <div class="creator-info-pill">
+          <img src="https://assets.leetcode.com/users/x_drxzx_x/avatar_1780635684.png" alt="Ahmad Shuaib" class="creator-mini-avatar" />
+          <strong class="creator-name">Ahmad Shuaib</strong>
+          <span class="creator-rank-tag">🏆 World Rank #403,799</span>
+        </div>
+        <div class="creator-social-pills">
+          <a href="https://leetcode.com/u/x_drxzx_x/" target="_blank" rel="noopener noreferrer" class="creator-link-chip lc">
+            <span>🟡</span> LeetCode Profile
+          </a>
+          <a href="https://github.com/drxzx7" target="_blank" rel="noopener noreferrer" class="creator-link-chip gh">
+            <span>🐙</span> GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/ahmad-shuaib-75543037a" target="_blank" rel="noopener noreferrer" class="creator-link-chip in">
+            <span>💼</span> LinkedIn
+          </a>
+        </div>
+      </div>
+
+      <!-- Hero Call To Actions -->
+      <div class="hero-action-buttons">
+        <button class="hero-primary-btn" id="heroExploreVisualizerBtn">
+          <span>🎮</span> Launch DSA Visualizer
+        </button>
+        <button class="hero-secondary-btn" id="heroExploreGridBtn">
+          <span>🧩</span> Browse 100 Problems
+        </button>
+        <button class="hero-glass-btn" id="heroProfileBtn">
+          <span>👤</span> Ahmad's Full Profile
+        </button>
+      </div>
+
+      <!-- Quick Stats Counters -->
+      <div class="quick-stats">
         <div class="stat-item">
           <span class="stat-number">10</span>
-          <span class="stat-label">DSA Patterns</span>
+          <span class="stat-label">Core DSA Patterns</span>
         </div>
         <div class="stat-divider"></div>
         <div class="stat-item">
           <span class="stat-number">100</span>
-          <span class="stat-label">Solutions</span>
+          <span class="stat-label">Interactive Visualizers</span>
         </div>
         <div class="stat-divider"></div>
         <div class="stat-item">
-          <span class="stat-number">4</span>
-          <span class="stat-label">Languages</span>
+          <span class="stat-number">400+</span>
+          <span class="stat-label">Multi-Lang Codes</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number">342+</span>
+          <span class="stat-label">LeetCode Solved</span>
         </div>
       </div>
+
     </div>
   </header>
 
   <!-- 📋 10 DSA PATTERNS OVERVIEW GRID -->
-  <section class="patterns-overview-section" id="patternsOverviewSection" style="max-width: 1280px; margin: 0 auto 40px; padding: 0 24px;">
-    <div class="section-header" style="text-align: center; margin-bottom: 24px;">
-      <h2 style="font-family: 'Outfit', sans-serif; font-size: 1.8rem; font-weight: 800;">📋 Core DSA Patterns</h2>
-      <p style="color: var(--text-muted); font-size: 0.95rem;">Select any pattern to filter problem solutions</p>
+  <section class="patterns-overview-section" id="patternsOverviewSection">
+    <div class="section-header">
+      <h2 class="subheading-pink-ui">📋 Core DSA Patterns</h2>
+      <p class="section-subtext">Select any pattern to filter problem solutions and launch interactive visualizers</p>
     </div>
     <div class="patterns-grid" id="patternsGridContainer">
       <!-- 10 Pattern Cards Injected by JS -->
@@ -102,8 +161,8 @@
   <section class="grid-filter-panel" id="filterSection">
     <!-- Search Bar -->
     <div class="filter-search-box">
-      <span>🔍</span>
-      <input type="text" id="searchInput" class="search-input-field" placeholder="Search 100 LeetCode problems by title, pattern, company (e.g. 'Two Sum', 'Google', 'Sliding Window')..." />
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" class="search-input-field" placeholder="Search 100 LeetCode problems by title, pattern, company (e.g. 'Two Sum', 'Google', 'Sliding Window', 'Dynamic Programming')..." />
     </div>
 
     <!-- Filter Pills -->
@@ -141,39 +200,51 @@
     </div>
   </section>
 
-  <!-- 👤 DEDICATED LEETCODE PROFILE MODAL / DRAWER (OPENS ON PROFILE ICON TOUCH) -->
+  <!-- 👤 DEDICATED LEETCODE PROFILE MODAL / DRAWER -->
   <div class="modal-backdrop" id="profileModalBackdrop">
-    <div class="problem-modal-container" style="max-width: 960px;">
+    <div class="problem-modal-container" style="max-width: 1020px;">
       
       <div class="modal-header-bar">
         <div class="modal-title-area">
-          <h2 style="display: flex; align-items: center; gap: 8px;">
+          <h2>
             <span>👤</span>
-            <span>LeetCode Profile & Progress</span>
+            <span>Ahmad Shuaib • LeetCode Profile & Statistics</span>
           </h2>
         </div>
         <button class="modal-close-btn" id="profileModalCloseBtn">&times;</button>
       </div>
 
-      <div class="modal-body-content" style="padding: 24px;">
+      <div class="modal-body-content" style="padding: 28px;">
         <div class="profile-banner-card">
           <div class="profile-grid-layout">
             
             <!-- Left: User Details Card -->
             <div class="profile-user-card">
               <div class="avatar-wrapper">
-                <img src="https://assets.leetcode.com/users/x_drxzx_x/avatar_1780635684.png" alt="Ahmad" class="user-avatar-lg" id="userAvatarLg" />
+                <img src="https://assets.leetcode.com/users/x_drxzx_x/avatar_1780635684.png" alt="Ahmad Shuaib" class="user-avatar-lg" id="userAvatarLg" />
                 <div class="online-indicator"></div>
               </div>
-              <h2 class="user-title-name" id="userFullName">Ahmad</h2>
+              <h2 class="user-title-name" id="userFullName">Ahmad Shuaib</h2>
               <div class="user-handle" id="userHandle">@x_drxzx_x</div>
               <div class="user-rank-badge">
                 🏆 World Rank <span id="userRank">#403,799</span>
               </div>
-              <a href="https://leetcode.com/u/x_drxzx_x/" target="_blank" class="nav-cta" style="margin-top: 12px; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-size: 0.85rem;">
-                <span>🔗</span> View Official LeetCode Profile
-              </a>
-              <div class="user-badges-row" id="userBadgesRow" style="margin-top: 16px;">
+
+              <!-- Social Links Group -->
+              <div class="profile-social-actions">
+                <a href="https://leetcode.com/u/x_drxzx_x/" target="_blank" rel="noopener noreferrer" class="profile-cta-btn cta-lc">
+                  <span>🟡</span> View LeetCode Profile
+                </a>
+                <a href="https://github.com/drxzx7" target="_blank" rel="noopener noreferrer" class="profile-cta-btn cta-gh">
+                  <span>🐙</span> View GitHub (@drxzx7)
+                </a>
+                <a href="https://www.linkedin.com/in/ahmad-shuaib-75543037a" target="_blank" rel="noopener noreferrer" class="profile-cta-btn cta-in">
+                  <span>💼</span> Connect on LinkedIn
+                </a>
+              </div>
+
+              <div class="user-badges-title" style="margin-top: 18px; font-size: 0.8rem; font-weight: 700; color: var(--text-secondary);">🏅 Verified Achievements</div>
+              <div class="user-badges-row" id="userBadgesRow" style="margin-top: 8px;">
                 <!-- Badges dynamically injected -->
               </div>
             </div>
@@ -185,7 +256,7 @@
               <div class="stats-counter-row">
                 <div class="stat-card-box">
                   <div class="stat-val-num" id="statTotalSolved">342</div>
-                  <div class="stat-val-label">LeetCode Solved</div>
+                  <div class="stat-val-label">LeetCode Problems Solved</div>
                 </div>
                 <div class="stat-card-box">
                   <div class="stat-val-num" id="statStreak">🔥 54</div>
@@ -248,7 +319,7 @@
     </div>
   </div>
 
-  <!-- 💖 PROBLEM DETAIL MODAL (CONTAINING ALL 6 MANDATORY SECTIONS) -->
+  <!-- 💖 PROBLEM DETAIL MODAL (FEATURING INTERACTIVE DSA VISUALIZER + 6 SECTIONS) -->
   <div class="modal-backdrop" id="problemModalBackdrop">
     <div class="problem-modal-container">
       
@@ -258,14 +329,21 @@
           <h2 id="modalProblemTitle">
             <span class="card-problem-id" id="modalProblemId">#1</span>
             <span id="modalTitleText">Two Sum</span>
+            <span class="modal-pattern-chip" id="modalPatternChip">🧩 Two Pointers</span>
           </h2>
         </div>
-        <button class="modal-close-btn" id="modalCloseBtn">&times;</button>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <a href="#" target="_blank" class="modal-lc-direct-btn" id="modalLcDirectLink" title="View on LeetCode.com">
+            <span>🌐 LeetCode</span>
+          </a>
+          <button class="modal-close-btn" id="modalCloseBtn">&times;</button>
+        </div>
       </div>
 
-      <!-- 6 Solution Section Navigation Tabs -->
+      <!-- Solution Section Navigation Tabs -->
       <div class="modal-sections-tabs">
-        <button class="section-tab-btn active" data-tab="tab-intuition">💡 (i) Intuition</button>
+        <button class="section-tab-btn active" data-tab="tab-visualizer">✨ (0) Interactive Visualizer</button>
+        <button class="section-tab-btn" data-tab="tab-intuition">💡 (i) Intuition</button>
         <button class="section-tab-btn" data-tab="tab-approach">🎯 (ii) Approach</button>
         <button class="section-tab-btn" data-tab="tab-algorithm">⚙️ (iii) Algorithm</button>
         <button class="section-tab-btn" data-tab="tab-complexity">📊 (iv) Complexity</button>
@@ -276,8 +354,15 @@
       <!-- Modal Body Content -->
       <div class="modal-body-content">
         
+        <!-- Tab 0: Interactive DSA Visualizer (Primary Spotlight) -->
+        <div class="tab-pane active" id="tab-visualizer">
+          <div id="problemVisualizerMount">
+            <!-- Universal DSA Visualizer Injected Here -->
+          </div>
+        </div>
+
         <!-- Tab 1: Intuition -->
-        <div class="tab-pane active" id="tab-intuition">
+        <div class="tab-pane" id="tab-intuition">
           <div class="section-card-box">
             <div class="section-card-title">💡 Core Intuition</div>
             <p id="modalIntuitionContent" style="line-height: 1.7; font-size: 1rem; color: var(--text-primary);"></p>
@@ -323,15 +408,18 @@
           <div class="section-card-box">
             <div class="code-lang-switcher">
               <div class="lang-tabs-group">
-                <button class="lang-tab-btn active" data-lang="cpp">C++</button>
-                <button class="lang-tab-btn" data-lang="java">Java</button>
-                <button class="lang-tab-btn" data-lang="python">Python</button>
-                <button class="lang-tab-btn" data-lang="javascript">JavaScript</button>
+                <button class="lang-tab-btn active" data-lang="cpp">⚡ C++</button>
+                <button class="lang-tab-btn" data-lang="java">☕ Java</button>
+                <button class="lang-tab-btn" data-lang="python">🐍 Python</button>
+                <button class="lang-tab-btn" data-lang="javascript">🟨 JavaScript</button>
               </div>
-              <button class="copy-code-btn" id="copyCodeBtn">📋 Copy Code</button>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="active-lang-badge" id="activeLangBadge">⚡ C++ (Optimal Solution)</span>
+                <button class="copy-code-btn" id="copyCodeBtn">📋 Copy Code</button>
+              </div>
             </div>
-            <pre class="code-editor-block"><code id="modalCodeContainer"></code></pre>
-            <p id="modalLangExplanation" style="margin-top: 14px; font-size: 0.88rem; color: var(--text-secondary); font-style: italic;"></p>
+            <div class="code-editor-block" id="modalCodeContainer"></div>
+            <div class="lang-explanation-box" id="modalLangExplanation" style="margin-top: 14px;"></div>
           </div>
         </div>
 
@@ -347,7 +435,34 @@
     </div>
   </div>
 
+  <!-- 🌟 FOOTER ATTRIBUTION -->
+  <footer class="app-footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <div class="footer-brand">
+          <span>💖</span> <strong>LeetCode Patterns Platform</strong>
+        </div>
+        <p class="footer-subtext">Crafted for outstanding engineering interviews & deep algorithmic mastery.</p>
+      </div>
+      <div class="footer-right">
+        <div class="footer-socials">
+          <a href="https://leetcode.com/u/x_drxzx_x/" target="_blank" rel="noopener noreferrer" class="footer-link-badge">
+            <span>🟡</span> LeetCode Profile
+          </a>
+          <a href="https://github.com/drxzx7" target="_blank" rel="noopener noreferrer" class="footer-link-badge">
+            <span>🐙</span> GitHub (@drxzx7)
+          </a>
+          <a href="https://www.linkedin.com/in/ahmad-shuaib-75543037a" target="_blank" rel="noopener noreferrer" class="footer-link-badge">
+            <span>💼</span> LinkedIn
+          </a>
+        </div>
+        <div class="footer-copy">© 2024 Ahmad Shuaib • All 100 Problems & Visualizers Ready</div>
+      </div>
+    </div>
+  </footer>
+
   <script src="data/problems_data.js"></script>
+  <script src="js/visualizer.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

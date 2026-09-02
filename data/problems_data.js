@@ -1,8 +1,12 @@
 window.LEETCODE_DATA = {
   "profile": {
-    "username": "Ahmad",
+    "username": "Ahmad Shuaib",
     "handle": "x_drxzx_x",
     "avatar": "https://assets.leetcode.com/users/x_drxzx_x/avatar_1780635684.png",
+    "leetcode_url": "https://leetcode.com/u/x_drxzx_x/",
+    "github_url": "https://github.com/drxzx7",
+    "github_handle": "drxzx7",
+    "linkedin_url": "https://www.linkedin.com/in/ahmad-shuaib-75543037a",
     "rank": "403,799",
     "global_top_percent": "12.4%",
     "contest_rating": 1785,
