@@ -1,16 +1,4 @@
 {
-  "version": 2,
-  "name": "leetcode-patterns-platform",
-  "builds": [
-    {
-      "src": "**/*",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
-  ]
+  "cleanUrls": true,
+  "trailingSlash": false
 }
