@@ -1,0 +1,11 @@
+{
+  "name": "leetcode-patterns-platform",
+  "version": "1.0.0",
+  "description": "100 LeetCode Problem Solutions with Interactive DSA Visualizers",
+  "scripts": {
+    "build": "echo 'Static build successful'"
+  },
+  "keywords": ["leetcode", "dsa", "algorithms", "visualizer"],
+  "author": "Ahmad Shuaib",
+  "license": "MIT"
+}
